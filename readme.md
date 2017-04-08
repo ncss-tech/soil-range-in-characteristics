@@ -1,10 +1,27 @@
 # ideas / proposals / references
 
 
+A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in the attached paper from the late '60s.
+
+## Possible Goals
+
+### Refinement of "low, rv, high" datbase concepts
+
+
+### Refinement of "range in characteristics" concept
+ 
+
+## Why Percentiles?
+
+* Percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide meaningful benchmarks for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data.
+
+* Percentiles have a direct interpretation: "given the available data, we know that soil property X is <= Y 5% of the time, and, <= Z 95% of the time". This same statement can be framed using probabilities or proportions: "given the available data, soil property X is within the range of Y--Z 90% of the time".
+
+* Percentiles are simple to calculate, requiring at least 3, but ideally 10 observations.
+
+
 
 ## Discussions
-
-Some of the highlights of the discussion:
 
 * many folks aren't familiar with percentiles: establishing a definition for low,rv,high based on percentiles will require some education
 
@@ -14,10 +31,9 @@ Some of the highlights of the discussion:
 
 * there is no consensus on the specific percentiles to pin our low and high concepts to: some argue for 5th/95th, others for 10th/90th, and some others for floating percentiles for different soil properties
 
-I would really like to have a discussion with you and Chad about this when there is some time. The current proposal is kind of a mess and I am thinking about a total re-write after the feedback from the Region 2 staff.
+ 
 
-A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in the attached paper from the late '60s. 
-
+## Implimentation
 I think that with a little work on the language, we can cover our past ranges and possible future data-gaps by crafting:
 
 * guidelines on the use of percentiles for current / future work, given a reasonable (minimum) sample size
@@ -26,13 +42,9 @@ I think that with a little work on the language, we can cover our past ranges an
 
 * a short discussion on how percentiles are the "theoretical aspiration" for our ranges, but may not always be feasible given data availability or quality
 
-Most importantly, a short description of "why this matters" may be helpful. My short list would include:
 
-* Percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide meaningful benchmarks for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data.
 
-* Percentiles have a direct interpretation: "given the available data, we know that soil property X is <= Y 5% of the time, and, <= Z 95% of the time". This same statement can be framed using probabilities or proportions: "given the available data, soil property X is within the range of Y--Z 90% of the time".
 
-* Percentiles are simple to calculate, requiring at least 3, but ideally 10 observations.
 
 
 
