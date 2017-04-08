@@ -45,7 +45,13 @@ I think that with a little work on the language, we can cover our past ranges an
 
 
 
+# Resources
 
+ * [Harrell-Davis quantile estimator](https://garstats.wordpress.com/2016/06/09/the-harrell-davis-quantile-estimator/) -- [link to original article](https://www.jstor.org/stable/2335999?seq=1#page_scan_tab_contents)
+ 
+ * comparison of groups via [shift function](https://garstats.wordpress.com/2016/07/12/shift-function/), [illustrated version](https://garstats.wordpress.com/2017/02/04/shift-function-illustration/)
+ 
+ * 
 
 
 

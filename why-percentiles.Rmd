@@ -20,7 +20,37 @@ options(width=100, stringsAsFactors=FALSE, cache=FALSE)
 ```
 
 
+```{r  echo=FALSE, results='hide', warning=FALSE}
+# convenient summary of vector x, can contain NA
+f.summary <- function(x) {
+  n <- length(na.omit(x))
+  frac.NA <- round( (1 - ( length(na.omit(x)) / length(x) ) ) * 100)
+  x.mean <- mean(x, na.rm=TRUE)
+  x.sd <- sd(x, na.rm=TRUE)
+  x.min <- min(x, na.rm=TRUE)
+  x.max <- max(x, na.rm=TRUE)
+  pr <- c(0.05, 0.1, 0.5, 0.9, 0.95)
+  q <- t(quantile(x, probs = c(0.05, 0.1, 0.5, 0.9, 0.95), na.rm=TRUE))
+  dimnames(q)[[2]] <- paste0('P', pr * 100)
+  d <- data.frame(mean=x.mean, sd=x.sd, min=x.min, max=x.max, q, n, frac.NA)
+  return(d)
+}
 
+```
+
+
+
+```{r echo=FALSE, results='hide', warning=FALSE}
+library(soilDB)
+# get some sample data
+x <- fetchKSSL('sierra')
+
+f.summary(x$ph_h2o)
+f.summary(x$clay)
+
+
+# plot(density(na.omit(x$clay[grep('A', x$hzn_desgn)])))
+```
 
 # Introduction
 
