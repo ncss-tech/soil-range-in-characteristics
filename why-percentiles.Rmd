@@ -36,20 +36,126 @@ f.summary <- function(x) {
   return(d)
 }
 
+## borrowed from MU reports
+# remove NA
+# re-scale to {0,1}
+# return x,y values
+scaled.density <- function(x) {
+  res <- stats::density(na.omit(x), cut=2)
+  return(data.frame(x=res$x, y=scales::rescale(res$y)))
+}
+
+
+compare.with.mean <- function(x) {
+  x <- na.omit(x)
+  s <- f.summary(x)
+  
+  # density plot of the data, scaled to {0,1}
+  d.x <- scaled.density(x)
+  # idealized normal over interval of the data
+  x.seq <- seq(s$mean - 3 * s$sd, s$mean + 3 * s$sd, length.out = 100)
+  ideal.normal <- cbind(x.seq, scales::rescale(dnorm(x.seq, mean=s$mean, sd=s$sd)))
+  
+  par(mar=c(3,1,1,1))
+  plot(d.x, type='l', lwd=2, las=1, ylim=c(-0.15, 1.1), axes=FALSE)
+  lines(ideal.normal)
+  abline(h=0, col=grey(0.85))
+  
+  ## percentiles
+  y.base <- -0.05
+  # lower / upper pctile
+  segments(x0=s$P10, x1=s$P90, y0=y.base, y1=y.base, col='RoyalBlue', lwd=2)
+  segments(x0=c(s$P10, x1=s$P90), x1=c(s$P10, x1=s$P90), y0=y.base, y1=1, lty=3, col='RoyalBlue')
+  # median
+  segments(x0=s$P50, x1=s$P50, y0=y.base, y1=1, lty=3, col='RoyalBlue')
+  points(s$P50, y.base, cex=1.2, pch=22, bg='RoyalBlue')
+  
+  ## idealized normal
+  y.base <- -0.1
+  # +/- SD
+  segments(x0=(-1 * s$sd) + s$mean, x1=(1 * s$sd) + s$mean, y0=y.base, y1=y.base, col='Orange', lwd=2)
+  segments(x0=(-1 * s$sd) + s$mean, x1=(-1 * s$sd) + s$mean, y0=y.base, y1=1, lty=3, col='Orange')
+  segments(x0=(1 * s$sd) + s$mean, x1=(1 * s$sd) + s$mean, y0=y.base, y1=1, lty=3, col='Orange')
+  # mean
+  segments(x0=s$mean, x1=s$mean, y0=y.base, y1=1, lty=3, col='Orange')
+  points(s$mean, y.base, cex=1.25, pch=22, bg='Orange')
+  
+  ## min / max
+  y.base <- -0.15
+  # +/- SD
+  segments(x0=s$min, x1=s$max, y0=y.base, y1=y.base, col='Darkred', lwd=2)
+  segments(x0=s$min, x1=s$min, y0=y.base, y1=1, lty=3, col='Darkred')
+  segments(x0=s$max, x1=s$max, y0=y.base, y1=1, lty=3, col='Darkred')
+  
+  axis(side=1, at = pretty(x, n = 8))
+  box()
+  legend('top', lwd=2, lty=1, col=c('RoyalBlue', 'Orange', 'Darkred'), legend = c('Percentiles', 'Mean +/- SD', 'Min / Max'), horiz=TRUE, bty='n')
+}
+
 ```
 
 
 
 ```{r echo=FALSE, results='hide', warning=FALSE}
 library(soilDB)
+library(scales)
+
 # get some sample data
-x <- fetchKSSL('sierra')
+kssl <- fetchKSSL('plano')
 
-f.summary(x$ph_h2o)
-f.summary(x$clay)
+var <- 'clay'
+hz <- 'B'
+hz.col <- 'hzn_desgn'
+
+h <- horizons(kssl)
+idx <- grep(hz, h[[hz.col]])
+x <- h[[var]][idx]
+
+compare.with.mean(x)
+
+```
+
+```{r}
+# get some sample data
+nasis <- fetchNASIS(rmHzErrors = FALSE)
+
+idx <- grep('crimeahouse', nasis$taxonname, ignore.case = TRUE)
+d <- nasis[idx, ]
+
+var <- 'clay'
+hz <- 'B'
+hz.col <- 'hzname'
+
+h <- horizons(nasis)
+idx <- grep(hz, h[[hz.col]])
+x <- h[[var]][idx]
+
+compare.with.mean(x)
+```
 
 
-# plot(density(na.omit(x$clay[grep('A', x$hzn_desgn)])))
+
+```{r}
+library(rgdal)
+library(raster)
+library(sharpshootR)
+
+# load map unit polygons
+# Shapefile Example
+mu <-  readOGR(dsn='E:/gis_data/ca630/FG_CA630_OFFICIAL.gdb', layer='ca630_a', stringsAsFactors = FALSE)
+
+# extract polygons for a single map unit ("MUSYM" attribute = "7089")
+# note that column names in your data may be different
+mu <- mu[which(mu$MUSYM == '7089'), ]
+
+# add a unique polygon ID
+mu$pID <- seq(from=1, to=length(mu))
+
+# best possible scenario: rasters are in memory
+r.elev <- readAll(raster('E:/gis_data/ca630/ca630_elev/hdr.adf'))
+r.slope <- readAll(raster('E:/gis_data/ca630/ca630_slope/hdr.adf'))
+
+s <- constantDensitySampling(mu, n.pts.per.ac=1, min.samples=1, polygon.id='pID')
 ```
 
 # Introduction
