@@ -19,7 +19,6 @@ options(width=100, stringsAsFactors=FALSE, cache=FALSE)
 
 
 ```{r  echo=FALSE, results='hide', warning=FALSE}
-
 library(soilDB)
 library(scales)
 library(Hmisc)
@@ -138,13 +137,78 @@ subsetData <- function(SPC, hzname, hz_pat, var) {
 ```
 
 
+```{r echo=FALSE, warning=FALSE}
+reMakeData <- FALSE
+
+if(reMakeData) {
+  # get some sample data
+  kssl <- fetchKSSL('miami')
+  nasis <- fetchNASIS(rmHzErrors = FALSE)
+  
+  idx <- grep('loafercreek', nasis$taxonname, ignore.case = TRUE)
+  loafercreek <- nasis[idx, ]
+  
+  idx <- grep('amador', nasis$taxonname, ignore.case = TRUE)
+  amador <- nasis[idx, ]
+  
+  idx <- grep('Nedsgulch', nasis$taxonname, ignore.case = TRUE)
+  nedsgulch <- nasis[idx, ]
+  
+  # best possible scenario: rasters are in memory
+  r.elev <- readAll(raster('E:/gis_data/ca630/ca630_elev/hdr.adf'))
+  r.slope <- readAll(raster('E:/gis_data/ca630/ca630_slope/hdr.adf'))
+  r.MAP <- readAll(raster('E:/gis_data/prism/final_MAP_mm_800m.tif'))
+  
+  # load map unit polygons
+  mu <-  readOGR(dsn='E:/gis_data/ca630/FG_CA630_OFFICIAL.gdb', layer='ca630_a', stringsAsFactors = FALSE)
+  
+  # add a unique polygon ID
+  mu$pID <- seq(from=1, to=length(mu))
+  
+  # extract polygons for a single map unit ("MUSYM" attribute = "7089")
+  # note that column names in your data may be different
+  mu.5012 <- mu[which(mu$MUSYM == '5012'), ]
+  
+  # generate sampling points
+  s <- constantDensitySampling(mu.5012, n.pts.per.ac=1, min.samples=1, polygon.id='pID')
+  
+  # extract raster data
+  e.elev <- extract(r.elev, s)
+  e.slope <- extract(r.slope, s)
+  e.MAP <- extract(r.MAP, s)
+  
+  # save for later
+  save(kssl, loafercreek, amador, nedsgulch, e.elev, e.slope, e.MAP, file='cached-data.rda')
+} else {
+  # get cached version
+  load(file='cached-data.rda')
+}
+
+```
 
 ```{r echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
+par(mar=c(4.5,1,2,1))
+
+# explanation of figures with random data
+
+set.seed(101010)
+x <- rnorm(100, mean=15, sd=2)
+res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+
+set.seed(101010)
+x <- rlnorm(100, meanlog = log(15), sdlog = log(1.5))
+res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+
+set.seed(101010)
+x <- rlnorm(100, meanlog = log(15), sdlog = log(3))
+res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+
+x <- rbeta(1000, 2, 20) * 100
+res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+```
 
 
-# get some sample data
-kssl <- fetchKSSL('miami')
-
+```{r echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
 par(mar=c(4.5,1,2,1))
 
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'B', var = 'clay')
@@ -159,47 +223,18 @@ res <- compare.with.mean(x, xlab='pH (%)', main='KSSL: Miami, B Horizons')
 ```
 
 ```{r  echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
-# get some sample data
-nasis <- fetchNASIS(rmHzErrors = FALSE)
-
-idx <- grep('loafercreek', nasis$taxonname, ignore.case = TRUE)
-d <- nasis[idx, ]
-
 par(mar=c(4.5,1,3,1))
 
-x <- subsetData(d, hzname = 'hzname', hz_pat = 'B', var = 'total_frags_pct')
+x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'B', var = 'total_frags_pct')
 res <- compare.with.mean(x, xlab='Total Fragment Volume', main='NASIS: Loafercreek, B Horizons')
 
-x <- subsetData(d, hzname = 'hzname', hz_pat = 'B', var = 'clay')
+x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'B', var = 'clay')
 res <- compare.with.mean(x, xlab='Percent Clay', main='NASIS: Loafercreek, B Horizons')
 ```
 
 
 
 ```{r  echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
-# best possible scenario: rasters are in memory
-r.elev <- readAll(raster('E:/gis_data/ca630/ca630_elev/hdr.adf'))
-r.slope <- readAll(raster('E:/gis_data/ca630/ca630_slope/hdr.adf'))
-r.MAP <- readAll(raster('E:/gis_data/prism/final_MAP_mm_800m.tif'))
-
-# load map unit polygons
-mu <-  readOGR(dsn='E:/gis_data/ca630/FG_CA630_OFFICIAL.gdb', layer='ca630_a', stringsAsFactors = FALSE)
-
-# extract polygons for a single map unit ("MUSYM" attribute = "7089")
-# note that column names in your data may be different
-mu <- mu[which(mu$MUSYM == '5012'), ]
-
-# add a unique polygon ID
-mu$pID <- seq(from=1, to=length(mu))
-
-# generate sampling points
-s <- constantDensitySampling(mu, n.pts.per.ac=1, min.samples=1, polygon.id='pID')
-
-# extract raster data
-e.elev <- extract(r.elev, s)
-e.slope <- extract(r.slope, s)
-e.MAP <- extract(r.MAP, s)
-
 par(mar=c(4.5,1,3,1))
 res <- compare.with.mean(e.elev, xlab='Elevation (m)', main='CA630: 5012')
 res <- compare.with.mean(e.slope, xlab='Slope (%)', main='CA630: 5012')
