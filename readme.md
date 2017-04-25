@@ -10,10 +10,9 @@ A concise rationale for a clearly defined set of "ranges" was given by Wilding e
 
 ### Refinement of "range in characteristics" concept
 
-![](figures/CA630-5012-MAP-example.png)
-
-
 ## Why Percentiles?
+
+![](figures/CA630-5012-MAP-example.png)
 
 * Percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide meaningful benchmarks for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data.
 
