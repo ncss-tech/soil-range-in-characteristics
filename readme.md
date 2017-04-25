@@ -19,7 +19,7 @@ A concise rationale for a clearly defined set of "ranges" was given by Wilding e
 
 * Percentiles are simple to calculate, requiring at least 3, but ideally 10 observations.
 
-
+[Graphical demonstration of these concepts](https://ncss-tech.github.io/soil-range-in-characteristics/why-percentiles.html)
 
 ## Discussions
 

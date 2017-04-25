@@ -26,53 +26,56 @@ library(rgdal)
 library(raster)
 library(sharpshootR)
 
-# convenient summary of vector x, can contain NA
-f.summary <- function(x) {
-  n <- length(na.omit(x))
-  frac.NA <- round( (1 - ( length(na.omit(x)) / length(x) ) ) * 100)
-  x.mean <- mean(x, na.rm=TRUE)
-  x.sd <- sd(x, na.rm=TRUE)
-  x.min <- min(x, na.rm=TRUE)
-  x.max <- max(x, na.rm=TRUE)
-  pr <- c(0.05, 0.1, 0.5, 0.9, 0.95)
-  q <- t(hdquantile(x, probs = c(0.05, 0.1, 0.5, 0.9, 0.95), na.rm=TRUE))
-  dimnames(q)[[2]] <- paste0('P', pr * 100)
-  d <- data.frame(mean=x.mean, sd=x.sd, min=x.min, max=x.max, q, n, frac.NA)
-  return(d)
-}
-
-## borrowed from MU reports
-# remove NA
-# re-scale to {0,1}
-# return x,y values
-scaled.density <- function(x) {
-  res <- stats::density(na.omit(x), cut=1)
-  return(data.frame(x=res$x, y=scales::rescale(res$y)))
-}
-
-
-compare.with.mean <- function(x, labels.signif=3, pctile.color='RoyalBlue', mean.color='Orange', range.color='DarkRed', boxp=FALSE, ...) {
+# move this to sharpshootR eventually
+percentileDemo <- function(x, labels.signif=3, pctile.color='RoyalBlue', mean.color='Orange', range.color='DarkRed', boxp=FALSE, ...) {
+  
+  # convenient summary of vector x, can contain NA
+  .summary <- function(x, pr=c(0.05, 0.1, 0.5, 0.9, 0.95)) {
+    n <- length(na.omit(x))
+    x.mean <- mean(x, na.rm=TRUE)
+    x.sd <- sd(x, na.rm=TRUE)
+    x.min <- min(x, na.rm=TRUE)
+    x.max <- max(x, na.rm=TRUE)
+    q <- t(hdquantile(x, probs = pr, na.rm=TRUE))
+    dimnames(q)[[2]] <- paste0('P', pr * 100)
+    d <- data.frame(mean=x.mean, sd=x.sd, min=x.min, max=x.max, q, n)
+    return(d)
+  }
+  
+  ## borrowed from MU reports
+  # remove NA
+  # re-scale to {0,1}
+  # return x,y values
+  .scaled.density <- function(x) {
+    res <- stats::density(na.omit(x), cut=1)
+    return(data.frame(x=res$x, y=scales::rescale(res$y)))
+  }
   
   # prep values
-  s <- f.summary(x)
+  s <- .summary(x)
   x <- na.omit(x)
   
   # plot parameters
   y.base.pctiles <- -0.05
-  y.base.normal <- -0.12
-  y.base.range <- -0.19
+  y.base.normal <- -0.15
+  y.base.range <- -0.25
+  label.offset <- 0.03
+  
   
   # density plot of the data, scaled to {0,1}
-  d.x <- scaled.density(x)
+  d.x <- .scaled.density(x)
   # idealized normal over interval of the data
   x.seq <- seq(s$mean - 2.5 * s$sd, s$mean + 2.5 * s$sd, length.out = 100)
   ideal.normal <- cbind(x.seq, scales::rescale(dnorm(x.seq, mean=s$mean, sd=s$sd)))
   
   # setup plot
-  plot(d.x, type='n', ylim=c(-0.2, 1.1), axes=FALSE, ...)
+  plot(d.x, type='n', ylim=c(-0.25, 1.1), axes=FALSE, ...)
   abline(h=c(0, 1), col=grey(0.85))
   lines(d.x, lwd=2)
   lines(ideal.normal)
+  
+  # add obs as vertical ticks
+  # points(x, rep(1, times=length(x)), pch='|', cex=0.5, col=grey(0.7))
   
   
   ## boxplot for reference
@@ -94,7 +97,7 @@ compare.with.mean <- function(x, labels.signif=3, pctile.color='RoyalBlue', mean
   segments(x0=s$P50, x1=s$P50, y0=y.base.pctiles, y1=1, lty=3, col=pctile.color)
   points(s$P50, y.base.pctiles, cex=1.2, pch=22, bg=pctile.color)
   # add values
-  text(x=c(s$P10, s$P50, s$P90), y=y.base.pctiles - 0.025, label=signif(c(s$P10, s$P50, s$P90), labels.signif), cex=0.65)
+  text(x=c(s$P10, s$P50, s$P90), y=y.base.pctiles - label.offset, label=signif(c(s$P10, s$P50, s$P90), labels.signif), cex=0.65)
   
   ## idealized normal
   # +/- SD
@@ -105,7 +108,7 @@ compare.with.mean <- function(x, labels.signif=3, pctile.color='RoyalBlue', mean
   segments(x0=s$mean, x1=s$mean, y0=y.base.normal, y1=1, lty=3, col=mean.color)
   points(s$mean, y.base.normal, cex=1.25, pch=22, bg=mean.color)
   # add values
-  text(x=c(((-2 * s$sd) + s$mean), s$mean, ((2 * s$sd) + s$mean)), y=y.base.normal - 0.025, label=signif(c(((-2 * s$sd) + s$mean), s$mean, ((2 * s$sd) + s$mean)), labels.signif), cex=0.65)
+  text(x=c(((-2 * s$sd) + s$mean), s$mean, ((2 * s$sd) + s$mean)), y=y.base.normal - label.offset, label=signif(c(((-2 * s$sd) + s$mean), s$mean, ((2 * s$sd) + s$mean)), labels.signif), cex=0.65)
   
   ## min / max
   # +/- SD
@@ -113,7 +116,7 @@ compare.with.mean <- function(x, labels.signif=3, pctile.color='RoyalBlue', mean
   segments(x0=s$min, x1=s$min, y0=y.base.range, y1=1, lty=3, col=range.color)
   segments(x0=s$max, x1=s$max, y0=y.base.range, y1=1, lty=3, col=range.color)
     # add values
-  text(x=c(s$min, s$max), y=y.base.range - 0.025, label=signif(c(s$min, s$max), labels.signif-1), cex=0.65)
+  text(x=c(s$min, s$max), y=y.base.range - label.offset, label=signif(c(s$min, s$max), labels.signif-1), cex=0.65)
   
   # finish basic axix / box
   axis(side=1, at = pretty(x, n = 10))
@@ -186,59 +189,122 @@ if(reMakeData) {
 
 ```
 
-```{r echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
-par(mar=c(4.5,1,2,1))
+```{r echo=FALSE}
+# example data for introduction
+set.seed(101010)
+x <- round(rnorm(11, mean=15, sd=4))
+```
 
-# explanation of figures with random data
+# Introduction
+This document describes the *percentile* as a robust measure of "place" within a distribution of values. Examples are given for its application in the context of soil data summaries.
 
+## Definition and Description of the Percentile
+Within a set of data, the *n-th* [percentile](https://en.wikipedia.org/wiki/Percentile) describes the value below which *n%* of the data, when sorted, fall. For example, within the integer sequence spanning 0 to 100, *50* is the 50th percentile or median, *10* is the 10th percentile, and *90* is the 90th percentile.
+
+Consider the following (hypothetical) field-described clay content from the A horizon of the same taxa:
+
+`r x`
+
+sorting,
+
+`r sort(x)`
+
+10th (`r quantile(x, probs=c(0.1))`), 50th (`r quantile(x, probs=c(0.5))`), and 90th (`r quantile(x, probs=c(0.9))`) percentiles.
+
+## Why Percentiles?
+
+* Percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide meaningful benchmarks for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data.
+
+* Direct interpretation; consider the 10th ($P_{10}$) and 90th ($P_{90}$) percentiles: "given the available data, we know that soil property $p < P_{10}$ 10% of the time, and, $p < P_{90}$ 90% of the time". This same statement can be framed using probabilities or proportions: "given the available data, soil property $p$ is within the range of $\{P_{10} - P_{90}\}$ 80% of the time".
+
+* Percentiles are simple to calculate, requiring at least 3, better 10, and ideally $>$ 20 observations.
+
+* The median is a robust estimator of [central tendency](https://en.wikipedia.org/wiki/Central_tendency).
+
+* The lower and upper percentiles (e.g. 10th and 90th) a robust estimator of spread.
+
+
+
+# Common Distribution Shapes
+
+The following figures demonstrate the relationship between distribution shape, measures of central tendency (mean and 50th percentile, and measures of spread (mean +/1 2 standard deviations, and 10th / 90th percentiles). Within each figure is an *idealized* normal distribution that is based on the sample mean and standard deviation.
+
+With a large enough sample size, the distribution of some soil properties can be approximated with the [normal or Gaussian distribution](https://en.wikipedia.org/wiki/Normal_distribution). In this case, the mean and median are practically equal and the spread around the central tendency is balanced. Examples include lab measured clay content and pH from a suite of related samples (e.g. A horizons from a single soil series concept).
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(3,1,2,1))
 set.seed(101010)
 x <- rnorm(100, mean=15, sd=2)
-res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+res <- percentileDemo(x, xlab='', ylab='', main='Approximately Normal')
+kable(res, digits = 1)
+```
 
+Various forms of the [log-normal distribution](https://en.wikipedia.org/wiki/Log-normal_distribution) are typically more accurate approximations of soil properties. Log-normal distributions with a "short tail", or a low degree of [asymmetry](https://en.wikipedia.org/wiki/Skewness) around the central tendency, are common. Note the shift between mean and median, and the unequal distances to 10th and 90th percentiles. Examples include lab measured organic carbon and field measured rock fragment volume.
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(3,1,2,1))
 set.seed(101010)
 x <- rlnorm(100, meanlog = log(15), sdlog = log(1.5))
-res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+res <- percentileDemo(x, xlab='', ylab='', main='Log-Normal: Short Tail')
+kable(res, digits = 1)
+```
 
+Log-normal distributions with a "long tail", or a high degree of [asymmetry](https://en.wikipedia.org/wiki/Skewness) around the central tendency, are commonly encountered when summarizing GIS data sources such as elevtion, slope, and curvature. Note that the mean +/- 2SD is now longer a meaningful representation of spread.
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(3,1,2,1))
 set.seed(101010)
 x <- rlnorm(100, meanlog = log(15), sdlog = log(3))
-res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
-
-x <- rbeta(1000, 2, 20) * 100
-res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+res <- percentileDemo(x, xlab='', ylab='', main='Log-Normal: Long Tail')
+kable(res, digits = 1)
 ```
 
+In general, the further the departure from a normal distribution, the less meaningful mean and standard deviation are as metrics of central tendency and spread.
 
-```{r echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
+
+# Lab Characterization Data
+Consider some data from the KSSL characterization database. 
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
 par(mar=c(4.5,1,2,1))
-
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'B', var = 'clay')
-res <- compare.with.mean(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
-
-x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'A', var = 'estimated_oc')
-res <- compare.with.mean(x, xlab='Organic Carbon (%)', main='KSSL: Miami, A Horizons')
-
-x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'B', var = 'estimated_ph_h2o')
-res <- compare.with.mean(x, xlab='pH (%)', main='KSSL: Miami, B Horizons')
-
+res <- percentileDemo(x, xlab='Percent Clay', main='KSSL: Miami, B Horizons')
+kable(res, digits = 1)
 ```
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(4.5,1,2,1))
+x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'A', var = 'estimated_oc')
+res <- percentileDemo(x, xlab='Organic Carbon (%)', main='KSSL: Miami, A Horizons')
+kable(res, digits = 1)
+```
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(4.5,1,2,1))
+x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'B', var = 'estimated_ph_h2o')
+res <- percentileDemo(x, xlab='pH (%)', main='KSSL: Miami, B Horizons')
+kable(res, digits = 1)
+```
+
+
+# Morpologic Data (NASIS)
 
 ```{r  echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
 par(mar=c(4.5,1,3,1))
 
 x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'B', var = 'total_frags_pct')
-res <- compare.with.mean(x, xlab='Total Fragment Volume', main='NASIS: Loafercreek, B Horizons')
+res <- percentileDemo(x, xlab='Total Fragment Volume', main='NASIS: Loafercreek, B Horizons')
 
 x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'B', var = 'clay')
-res <- compare.with.mean(x, xlab='Percent Clay', main='NASIS: Loafercreek, B Horizons')
+res <- percentileDemo(x, xlab='Percent Clay', main='NASIS: Loafercreek, B Horizons')
 ```
 
 
+# GIS Data
 
 ```{r  echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
 par(mar=c(4.5,1,3,1))
-res <- compare.with.mean(e.elev, xlab='Elevation (m)', main='CA630: 5012')
-res <- compare.with.mean(e.slope, xlab='Slope (%)', main='CA630: 5012')
-res <- compare.with.mean(e.MAP, xlab='PRISM Mean Annual PPT (mm)', main='CA630: 5012')
+res <- percentileDemo(e.elev, xlab='Elevation (m)', main='CA630: 5012')
+res <- percentileDemo(e.slope, xlab='Slope (%)', main='CA630: 5012')
+res <- percentileDemo(e.MAP, xlab='PRISM Mean Annual PPT (mm)', main='CA630: 5012')
 ```
 
 
