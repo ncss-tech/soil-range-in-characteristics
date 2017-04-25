@@ -274,7 +274,7 @@ kable(res, digits = 1)
 par(mar=c(4.5,1,2,1))
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'A', var = 'estimated_oc')
 res <- percentileDemo(x, xlab='Organic Carbon (%)', main='KSSL: Miami, A Horizons')
-kable(res, digits = 1)
+kable(res, digits = 3)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
@@ -287,24 +287,39 @@ kable(res, digits = 1)
 
 # Morpologic Data (NASIS)
 
-```{r  echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
-par(mar=c(4.5,1,3,1))
-
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(4.5,1,2,1))
 x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'B', var = 'total_frags_pct')
 res <- percentileDemo(x, xlab='Total Fragment Volume', main='NASIS: Loafercreek, B Horizons')
+kable(res, digits = 1)
+```
 
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(4.5,1,2,1))
 x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'B', var = 'clay')
 res <- percentileDemo(x, xlab='Percent Clay', main='NASIS: Loafercreek, B Horizons')
+kable(res, digits = 1)
 ```
 
 
 # GIS Data
 
-```{r  echo=FALSE, results='hide', warning=FALSE, fig.width=9, fig.height=6.5}
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
 par(mar=c(4.5,1,3,1))
 res <- percentileDemo(e.elev, xlab='Elevation (m)', main='CA630: 5012')
+kable(res, digits = 1)
+```
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(4.5,1,3,1))
 res <- percentileDemo(e.slope, xlab='Slope (%)', main='CA630: 5012')
+kable(res, digits = 1)
+```
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(4.5,1,3,1))
 res <- percentileDemo(e.MAP, xlab='PRISM Mean Annual PPT (mm)', main='CA630: 5012')
+kable(res, digits = 1)
 ```
 
 
