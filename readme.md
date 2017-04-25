@@ -9,7 +9,9 @@ A concise rationale for a clearly defined set of "ranges" was given by Wilding e
 
 
 ### Refinement of "range in characteristics" concept
- 
+
+![](figures/CA630-5012-MAP-example.png)
+
 
 ## Why Percentiles?
 
