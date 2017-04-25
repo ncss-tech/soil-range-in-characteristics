@@ -61,7 +61,7 @@ percentileDemo <- function(x, labels.signif=3, pctile.color='RoyalBlue', mean.co
   y.base.pctiles <- -0.05
   y.base.normal <- -0.15
   y.base.range <- -0.25
-  label.offset <- 0.03
+  label.offset <- 0.04
   
   
   # density plot of the data, scaled to {0,1}
@@ -76,7 +76,7 @@ percentileDemo <- function(x, labels.signif=3, pctile.color='RoyalBlue', mean.co
   x.hist$counts <- scales::rescale(x.hist$counts)
   
   # setup plot
-  plot(d.x, type='n', ylim=c(-0.25, 1.1), axes=FALSE, ...)
+  plot(d.x, type='n', ylim=c(-0.3, 1.1), axes=FALSE, ...)
   abline(h=c(0, 1), col=grey(0.85))
   plot(x.hist, add=TRUE, col=grey(0.9), border=grey(0.85))
   lines(d.x, lwd=2)
@@ -369,19 +369,19 @@ Many sampled values leads to more reliable estimates of central tendency and spr
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,3,1))
-res <- percentileDemo(e.elev, hist.breaks=90, xlab='Elevation (m)', main='CA630: 5012')
+res <- percentileDemo(e.elev, hist.breaks=90, xlab='Elevation (m)', main='CA630: Map Unit 5012')
 kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,3,1))
-res <- percentileDemo(e.slope, hist.breaks=90, xlab='Slope (%)', main='CA630: 5012')
+res <- percentileDemo(e.slope, hist.breaks=90, xlab='Slope (%)', main='CA630: Map Unit 5012')
 kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,3,1))
-res <- percentileDemo(e.MAP, hist.breaks=90, xlab='PRISM Mean Annual PPT (mm)', main='CA630: 5012')
+res <- percentileDemo(e.MAP, hist.breaks=90, xlab='PRISM Mean Annual PPT (mm)', main='CA630: Map Unit 5012')
 kable(res, digits = 1)
 ```
 
