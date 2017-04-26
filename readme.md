@@ -5,7 +5,10 @@ A concise rationale for a clearly defined set of "ranges" was given by Wilding e
 
 ## Possible Goals
 
-### Refinement of "low, rv, high" datbase concepts
+### Proposed definition for new section C. in Part 618.2
+
+    C.	For recent and newly populated information in NASIS, the representative values are meant to approximate the 50th percentile of the data. The low and high values are meant to approximate the 5th- 10th and the 90th-95th percentiles, respectively. The low, high, and representative values for data populated prior to this version of the National Soil Survey Handbook were not guided by the percentile approach but also generally approximate the current definition. The percentile approach is preferred over other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data. Even where data used to populate the SSURGO database are not computationally derived, the populated values are designed to approximate the aforementioned percentiles for the data set being described.
+
 
 
 ### Refinement of "range in characteristics" concept
