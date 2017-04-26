@@ -96,7 +96,7 @@ x <- round(rnorm(11, mean=15, sd=4))
 This document describes the *percentile* as a robust measure of central tendency and spread within a distribution of values. Examples are given for its application in the context of soil data summaries.
 
 ## Definition and Description of the Percentile
-Within a set of data, the *n-th* [percentile](https://en.wikipedia.org/wiki/Percentile) describes the value below which *n%* of the data, when sorted, fall. For example, within the integer sequence spanning 0 to 100, *50* is the 50th percentile or median, *10* is the 10th percentile, and *90* is the 90th percentile.
+Within a set of data, the *n-th* [percentile](https://en.wikipedia.org/wiki/Percentile) describes the value below which *n%* of the data, when sorted, fall. For example, within the integer sequence spanning from 0 to 100, *50* is the 50th percentile or median, *10* is the 10th percentile, and *90* is the 90th percentile.
 
 Consider the following (hypothetical) field-described clay content from the A horizon of the same taxa:
 
@@ -125,14 +125,16 @@ resulting:
 
 * The lower and upper percentiles (e.g. 10th and 90th) a robust estimator of spread.
 
+* Statistics such as the mean, standard deviation, and confidence intervals are based on the normal distribution.
+
 
 ## Small Sample Sizes and Interpolation
-Estimation of percentiles is based on ranking of the original data. Interpolation *between observed values* is required when sample size is small (generally less than 10 observations). Consider the values `(1,3,5,6,7,9,9,10)`. Estimation of the 10th, 50th, and 90th percentiles results in `r round(Hmisc::hdquantile(c(1,3,5,6,7,9,9,10), probs = c(0.1, 0.5, 0.9)))` respectively. Since we are not typically interested in the estimated percentiles verbatim, the interpolated estimates are close enough. The [Harrel-Davis quantile estimator](https://rdrr.io/cran/Hmisc/man/hdquantile.html) is a robust method for estimating quantiles, no matter the sample size.
+Estimation of percentiles is based on ranking of the original data. Interpolation *between observed values* is required when sample size is small (generally less than 10 observations). Consider the values `(1,3,5,6,7,9,9,10)`. Estimation of the 10th, 50th, and 90th percentiles results in `r round(Hmisc::hdquantile(c(1,3,5,6,7,9,9,10), probs = c(0.1, 0.5, 0.9)))` respectively. Since we are not typically interested in the estimated percentiles verbatim, the interpolated estimates are close enough. The [Harrel-Davis estimator](https://rdrr.io/cran/Hmisc/man/hdquantile.html) is a robust method for deriving percentiles in the presence of ties and when sample size is small.
 
 
 # Common Distribution Shapes
 
-The following figures demonstrate the relationship between distribution shape, measures of central tendency (mean and 50th percentile), and measures of spread (mean +/1 2 standard deviations, and 10th / 90th percentiles). Within each figure is an *idealized* normal distribution that is based on the sample mean and standard deviation. The y-axis can be interpreted as the "relative proportion" of samples associated with a value on the x-axis. The thick, smooth lines represent an estimate of [density](https://en.wikipedia.org/wiki/Density_estimation), a continuous alternative to the [histogram](https://en.wikipedia.org/wiki/Histogram) (grey columns).
+The following figures demonstrate the relationship between distribution shape, measures of central tendency (mean and 50th percentile), and measures of spread (mean +/1 2 standard deviations, and 10th / 90th percentiles). Within each figure is an *idealized* normal distribution that is based on the sample mean and standard deviation. The y-axis can be interpreted as the "relative proportion" of samples associated with a value on the x-axis. The thick, smooth lines represent an estimate of [density](https://en.wikipedia.org/wiki/Density_estimation) using real measurements, a continuous alternative to the [histogram](https://en.wikipedia.org/wiki/Histogram) (grey columns).
 
 
 ## Symmetry Around the Central Tendency
@@ -142,7 +144,7 @@ With a large enough sample size, the distribution of some soil properties can be
 par(mar=c(3,1,2,1))
 set.seed(101010)
 x <- rnorm(100, mean=15, sd=2)
-res <- percentileDemo(x, xlab='', ylab='', main='Approximately Normal')
+res <- percentileDemo(x, xlab='Hypothetical Values', ylab='', main='Approximately Normal')
 kable(res, digits = 1)
 ```
 
@@ -152,7 +154,7 @@ Various forms of the [log-normal distribution](https://en.wikipedia.org/wiki/Log
 par(mar=c(3,1,2,1))
 set.seed(101010)
 x <- rlnorm(100, meanlog = log(15), sdlog = log(1.5))
-res <- percentileDemo(x, xlab='', ylab='', main='Log-Normal: Short Tail')
+res <- percentileDemo(x, xlab='Hypothetical Values', ylab='', main='Log-Normal: Short Tail')
 kable(res, digits = 1)
 ```
 
@@ -161,7 +163,7 @@ Log-normal distributions with a "long tail", e.g. more [skewed](https://en.wikip
 par(mar=c(1,1,2,1))
 set.seed(101010)
 x <- rlnorm(100, meanlog = log(15), sdlog = log(3.8))
-res <- percentileDemo(x, xlab='', ylab='', main='Log-Normal: Long Tail')
+res <- percentileDemo(x, xlab='Hypothetical Values', ylab='', main='Log-Normal: Long Tail')
 kable(res, digits = 1)
 ```
 
