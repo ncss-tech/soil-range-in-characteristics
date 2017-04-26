@@ -126,18 +126,17 @@ resulting:
 * The lower and upper percentiles (e.g. 10th and 90th) a robust estimator of spread.
 
 
-### Small Sample Sizes and Interpolation
-Estimation of percentiles is based on ranking of the original data. Interpolation *between observed values* is required when there is a small number of samples. Consider the values `(1,3,5,6,7,9,9,10)`. Estimation of the 10th, 50th, and 90th percentiles results in `r round(Hmisc::hdquantile(c(1,3,5,6,7,9,9,10), probs = c(0.1, 0.5, 0.9)))` respectively. Since we are not typically interested in the estimated percentiles verbatim, the interpolated estimates are close enough. The [Harrel-Davis quantile estimator](https://rdrr.io/cran/Hmisc/man/hdquantile.html) is a robust method for estimating quantiles, no matter the sample size.
-
+## Small Sample Sizes and Interpolation
+Estimation of percentiles is based on ranking of the original data. Interpolation *between observed values* is required when sample size is small (generally less than 10 observations). Consider the values `(1,3,5,6,7,9,9,10)`. Estimation of the 10th, 50th, and 90th percentiles results in `r round(Hmisc::hdquantile(c(1,3,5,6,7,9,9,10), probs = c(0.1, 0.5, 0.9)))` respectively. Since we are not typically interested in the estimated percentiles verbatim, the interpolated estimates are close enough. The [Harrel-Davis quantile estimator](https://rdrr.io/cran/Hmisc/man/hdquantile.html) is a robust method for estimating quantiles, no matter the sample size.
 
 
 # Common Distribution Shapes
 
-The following figures demonstrate the relationship between distribution shape, measures of central tendency (mean and 50th percentile, and measures of spread (mean +/1 2 standard deviations, and 10th / 90th percentiles). Within each figure is an *idealized* normal distribution that is based on the sample mean and standard deviation. The y-axis can be interpreted as the "relative proportion" of samples associated with a value on the x-axis. The thick, smooth lines represent an estimate of [density](https://en.wikipedia.org/wiki/Density_estimation), a continuous alternative to the [histogram](https://en.wikipedia.org/wiki/Histogram) (grey columns).
+The following figures demonstrate the relationship between distribution shape, measures of central tendency (mean and 50th percentile), and measures of spread (mean +/1 2 standard deviations, and 10th / 90th percentiles). Within each figure is an *idealized* normal distribution that is based on the sample mean and standard deviation. The y-axis can be interpreted as the "relative proportion" of samples associated with a value on the x-axis. The thick, smooth lines represent an estimate of [density](https://en.wikipedia.org/wiki/Density_estimation), a continuous alternative to the [histogram](https://en.wikipedia.org/wiki/Histogram) (grey columns).
 
 
 ## Symmetry Around the Central Tendency
-With a large enough sample size, the distribution of some soil properties can be approximated with the [normal or Gaussian distribution](https://en.wikipedia.org/wiki/Normal_distribution). In this case, the mean and median are practically equal and the spread around the central tendency is balanced. Examples include lab measured clay content and pH from a suite of related samples (e.g. A horizons from a single soil series concept).
+With a large enough sample size, the distribution of some soil properties can be approximated with the [normal or Gaussian distribution](https://en.wikipedia.org/wiki/Normal_distribution). In this case, the mean and median are practically equal and the spread around the central tendency is symmetric. Examples include lab measured clay content or pH, from a collection of related samples (e.g. A horizons from a single soil series concept).
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(3,1,2,1))
@@ -158,8 +157,8 @@ kable(res, digits = 1)
 ```
 
 Log-normal distributions with a "long tail", e.g. more [skewed](https://en.wikipedia.org/wiki/Skewness), are commonly encountered when summarizing GIS data sources such as elevation, slope, and curvature. Note that the mean +/- 2SD is no longer a meaningful representation of spread around the central tendency.
-```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
-par(mar=c(3,1,2,1))
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5}
+par(mar=c(1,1,2,1))
 set.seed(101010)
 x <- rlnorm(100, meanlog = log(15), sdlog = log(3.8))
 res <- percentileDemo(x, xlab='', ylab='', main='Log-Normal: Long Tail')
@@ -168,30 +167,54 @@ kable(res, digits = 1)
 
 In general, the further the departure from a normal distribution, the less meaningful mean and standard deviation are as metrics of central tendency and spread.
 
+## Caution: Comparison of Apples and Oranges
+A mixture of incompatible data (e.g. A and Bt clay content) will always result in unreliable summary statistics. Consider the following hypothetical, [multimodal distribution](https://en.wikipedia.org/wiki/Multimodal_distribution) of clay content resulting from erroneously combining data from A and Bt horizons. In this case the estimates of central tendency are representative of neither group and the estimates of spread are misleading. A graphical inspection of distribution shape is critical to *meaningful* estimation of central tendency and spread.
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
+par(mar=c(4.5,1,2,1))
+set.seed(101010)
+x <- c(rnorm(100, mean=10, sd=0.8), rnorm(100, mean=20, sd=1.5))
+res <- percentileDemo(x, xlab='', main='Hypothetical Bimodal Distribution', labels.signif = 1, hist.breaks = 60)
+```
 
 # Examples
 
 ## Lab Characterization Data
+The following examples are based on KSSL data correlated to the [Miami](https://casoilresource.lawr.ucdavis.edu/sde/?series=miami) series.
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
-x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt', var = 'clay')
-res <- percentileDemo(x, xlab='Percent Clay', main='KSSL: Miami, Bt Horizons')
+x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'clay')
+res <- percentileDemo(x, xlab='Percent Clay', main='KSSL: Miami, Ap Horizons')
 kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
-x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'A', var = 'estimated_oc')
-res <- percentileDemo(x, xlab='Organic Carbon (%)', main='KSSL: Miami, A Horizons')
+x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'estimated_oc')
+res <- percentileDemo(x, xlab='Organic Carbon (%)', main='KSSL: Miami, Ap Horizons')
 kable(res, digits = 3)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
-x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt', var = 'estimated_ph_h2o')
-res <- percentileDemo(x, xlab='pH', main='KSSL: Miami, Bt Horizons', labels.signif = 2)
+x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt1', var = 'clay')
+res <- percentileDemo(x, xlab='Percent Clay', main='KSSL: Miami, Bt1 Horizons')
 kable(res, digits = 1)
+```
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
+par(mar=c(4.5,1,2,1))
+x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt1', var = 'estimated_ph_h2o')
+res <- percentileDemo(x, xlab='pH', main='KSSL: Miami, Bt1 Horizons', labels.signif = 2)
+kable(res, digits = 1)
+```
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
+par(mar=c(4.5,1,2,1))
+kssl$thick <- (kssl$hzn_top + kssl$hzn_bot) / 2
+x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt1', var = 'thick')
+res <- percentileDemo(x, xlab='Horizon Thickness (cm)', main='KSSL: Miami, Bt1 Horizons', labels.signif = 1)
+kable(res, digits = 0)
 ```
 
 
