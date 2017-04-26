@@ -213,11 +213,12 @@ Consider the following (hypothetical) field-described clay content from the A ho
 
 `r x`
 
-sorting,
+sorted:
 
 `r sort(x)`
 
-10th (`r quantile(x, probs=c(0.1))`), 50th (`r quantile(x, probs=c(0.5))`), and 90th (`r quantile(x, probs=c(0.9))`) percentiles.
+resulting: 10th (`r quantile(x, probs=c(0.1))`), 50th (`r quantile(x, probs=c(0.5))`), and 90th (`r quantile(x, probs=c(0.9))`) percentiles.
+
 
 ## Why Percentiles?
 
@@ -251,7 +252,7 @@ res <- percentileDemo(x, xlab='', ylab='', main='Approximately Normal')
 kable(res, digits = 1)
 ```
 
-Various forms of the [log-normal distribution](https://en.wikipedia.org/wiki/Log-normal_distribution) are typically more accurate approximations of soil properties. Log-normal distributions with a "short tail", or a low degree of asymmetry  ([skewness](https://en.wikipedia.org/wiki/Skewness)) around the central tendency, are common. Note the shift between mean and median, and the unequal distances to 10th and 90th percentiles. Examples include lab measured organic carbon and field measured rock fragment volume.
+Various forms of the [log-normal distribution](https://en.wikipedia.org/wiki/Log-normal_distribution) are typically more accurate approximations of soil properties. Log-normal distributions with a "short tail", or a low degree of asymmetry around the central tendency ([skewness](https://en.wikipedia.org/wiki/Skewness)), are common. Note the shift between mean and median, and the unequal distances to 10th and 90th percentiles. Examples include lab measured organic carbon and field measured rock fragment volume.
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(3,1,2,1))
 set.seed(101010)
@@ -260,11 +261,11 @@ res <- percentileDemo(x, xlab='', ylab='', main='Log-Normal: Short Tail')
 kable(res, digits = 1)
 ```
 
-Log-normal distributions with a "long tail", or a high degree of [skewness](https://en.wikipedia.org/wiki/Skewness) around the central tendency, are commonly encountered when summarizing GIS data sources such as elevation, slope, and curvature. Note that the mean +/- 2SD is now longer a meaningful representation of spread.
+Log-normal distributions with a "long tail", e.g. more [skewed](https://en.wikipedia.org/wiki/Skewness), are commonly encountered when summarizing GIS data sources such as elevation, slope, and curvature. Note that the mean +/- 2SD is no longer a meaningful representation of spread around the central tendency.
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(3,1,2,1))
 set.seed(101010)
-x <- rlnorm(100, meanlog = log(15), sdlog = log(3))
+x <- rlnorm(100, meanlog = log(15), sdlog = log(3.8))
 res <- percentileDemo(x, xlab='', ylab='', main='Log-Normal: Long Tail')
 kable(res, digits = 1)
 ```
