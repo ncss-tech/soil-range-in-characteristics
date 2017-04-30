@@ -11,7 +11,7 @@
 
 <meta name="author" content="D.E. Beaudette" />
 
-<meta name="date" content="2017-04-26" />
+<meta name="date" content="2017-04-29" />
 
 <title>Percentile Demonstration</title>
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Percentile Demonstration</h1>
 <h4 class="author"><em>D.E. Beaudette</em></h4>
-<h4 class="date"><em>2017-04-26</em></h4>
+<h4 class="date"><em>2017-04-29</em></h4>
 
 </div>
 
@@ -918,8 +918,8 @@ x &lt;- fetchNASIS()</code></pre>
 <li>horizon designation matching <code>Bt1</code></li>
 </ul>
 <pre class="r"><code># filter taxonname
-idx &lt;- grep('Nedsgulch', nasis$taxonname, ignore.case = TRUE)
-nedsgulch &lt;- nasis[idx, ]
+idx &lt;- grep('Nedsgulch', x$taxonname, ignore.case = TRUE)
+nedsgulch &lt;- x[idx, ]
 h &lt;- horizons(nedsgulch)
 
 # filter horizon designation

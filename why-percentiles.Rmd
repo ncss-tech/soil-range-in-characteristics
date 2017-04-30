@@ -331,8 +331,8 @@ Create subset of relevant data:
  * horizon designation matching `Bt1`
 ```{r eval=FALSE}
 # filter taxonname
-idx <- grep('Nedsgulch', nasis$taxonname, ignore.case = TRUE)
-nedsgulch <- nasis[idx, ]
+idx <- grep('Nedsgulch', x$taxonname, ignore.case = TRUE)
+nedsgulch <- x[idx, ]
 h <- horizons(nedsgulch)
 
 # filter horizon designation
