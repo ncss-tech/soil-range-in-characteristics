@@ -19,6 +19,7 @@ options(width=100, stringsAsFactors=FALSE, cache=FALSE)
 
 
 ```{r  echo=FALSE, results='hide', warning=FALSE}
+library(aqp)
 library(soilDB)
 library(scales)
 library(Hmisc)
@@ -145,7 +146,6 @@ par(mar=c(3,1,2,1))
 set.seed(101010)
 x <- rnorm(100, mean=15, sd=2)
 res <- percentileDemo(x, xlab='Hypothetical Values', ylab='', main='Approximately Normal')
-kable(res, digits = 1)
 ```
 
 ## Skewness: Asymmetric "Tails"
@@ -164,7 +164,6 @@ par(mar=c(1,1,2,1))
 set.seed(101010)
 x <- rlnorm(100, meanlog = log(15), sdlog = log(3.8))
 res <- percentileDemo(x, xlab='Hypothetical Values', ylab='', main='Log-Normal: Long Tail')
-kable(res, digits = 1)
 ```
 
 In general, the further the departure from a normal distribution, the less meaningful mean and standard deviation are as metrics of central tendency and spread.
@@ -187,28 +186,24 @@ The following examples are based on KSSL data correlated to the [Miami](https://
 par(mar=c(4.5,1,2,1))
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'clay')
 res <- percentileDemo(x, xlab='Percent Clay', main='KSSL: Miami, Ap Horizons')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'estimated_oc')
 res <- percentileDemo(x, xlab='Organic Carbon (%)', main='KSSL: Miami, Ap Horizons')
-kable(res, digits = 3)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt1', var = 'clay')
 res <- percentileDemo(x, xlab='Percent Clay', main='KSSL: Miami, Bt1 Horizons')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt1', var = 'estimated_ph_h2o')
 res <- percentileDemo(x, xlab='pH', main='KSSL: Miami, Bt1 Horizons', labels.signif = 2)
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
@@ -216,8 +211,19 @@ par(mar=c(4.5,1,2,1))
 kssl$thick <- (kssl$hzn_top + kssl$hzn_bot) / 2
 x <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Bt1', var = 'thick')
 res <- percentileDemo(x, xlab='Horizon Thickness (cm)', main='KSSL: Miami, Bt1 Horizons', labels.signif = 1)
-kable(res, digits = 0)
 ```
+
+```{r echo=FALSE, warning=FALSE, fig.width=8.5, fig.height=8.5, fig.keep='last'}
+sand <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'sand')
+silt <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'silt')
+clay <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'clay')
+
+ssc <- na.omit(cbind(sand, silt, clay))
+
+texture.triangle.low.rv.high(ssc, cex=0.75, p=c(0.1, 0.5, 0.9), sim = TRUE, texture.names=TRUE, legend.cex = 0.85)
+title('KSSL: Miami, Ap Horizons')
+```
+
 
 
 ## Morpologic Data (NASIS)
@@ -228,22 +234,20 @@ kable(res, digits = 0)
 par(mar=c(4.5,1,2,1))
 x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'Bt', var = 'total_frags_pct')
 res <- percentileDemo(x, xlab='Rock Fragment Volume (%)', main='NASIS: Loafercreek, Bt Horizons')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'A', var = 'clay')
 res <- percentileDemo(x, xlab='Percent Clay', main='NASIS: Loafercreek, A Horizons')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(loafercreek, hzname = 'hzname', hz_pat = 'Bt', var = 'clay')
 res <- percentileDemo(x, xlab='Percent Clay', main='NASIS: Loafercreek, Bt Horizons')
-kable(res, digits = 1)
 ```
+
 
 ### Pedons Correlated to Nedsgulch
 
@@ -251,21 +255,18 @@ kable(res, digits = 1)
 par(mar=c(4.5,1,2,1))
 x <- subsetData(nedsgulch, hzname = 'hzname', hz_pat = 'A', var = 'sand')
 res <- percentileDemo(x, xlab='Percent Sand', main='NASIS: Nedsgulch, A Horizons')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(nedsgulch, hzname = 'hzname', hz_pat = 'Bt', var = 'total_frags_pct')
 res <- percentileDemo(x, xlab='Rock Fragment Volume (%)', main='NASIS: Nedsgulch, Bt Horizons')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(nedsgulch, hzname = 'hzname', hz_pat = 'A', var = 'phfield')
 res <- percentileDemo(x, xlab='pH', main='NASIS: Nedsgulch, A Horizons', labels.signif = 2)
-kable(res, digits = 1)
 ```
 
 
@@ -276,14 +277,12 @@ Note that histogram and density estimates are not very helpful when sample size 
 par(mar=c(4.5,1,2,1))
 x <- subsetData(amador, hzname = 'hzname', hz_pat = 'A', var = 'clay')
 res <- percentileDemo(x, xlab='Percent Sand', main='NASIS: Amador, A Horizons')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,2,1))
 x <- subsetData(amador, hzname = 'hzname', hz_pat = 'A', var = 'total_frags_pct')
 res <- percentileDemo(x, xlab='Rock Fragment Volume (%)', main='NASIS: Amador, A Horizons')
-kable(res, digits = 1)
 ```
 
 ## GIS Data
@@ -292,19 +291,16 @@ Many sampled values leads to more reliable estimates of central tendency and spr
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,3,1))
 res <- percentileDemo(e.elev, hist.breaks=90, xlab='Elevation (m)', main='CA630: Map Unit 5012')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,3,1))
 res <- percentileDemo(e.slope, hist.breaks=90, xlab='Slope (%)', main='CA630: Map Unit 5012')
-kable(res, digits = 1)
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
 par(mar=c(4.5,1,3,1))
 res <- percentileDemo(e.MAP, hist.breaks=90, xlab='PRISM Mean Annual PPT (mm)', main='CA630: Map Unit 5012')
-kable(res, digits = 1)
 ```
 
 # Re-Create With Your Own Data
