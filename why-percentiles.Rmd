@@ -135,7 +135,7 @@ Estimation of percentiles is based on ranking of the original data. Interpolatio
 
 # Common Distribution Shapes
 
-The following figures demonstrate the relationship between distribution shape, measures of central tendency (mean and 50th percentile), and measures of spread (mean +/1 2 standard deviations, and 10th / 90th percentiles). Within each figure is an *idealized* normal distribution that is based on the sample mean and standard deviation. The y-axis can be interpreted as the "relative proportion" of samples associated with a value on the x-axis. The thick, smooth lines represent an estimate of [density](https://en.wikipedia.org/wiki/Density_estimation) using real measurements, a continuous alternative to the [histogram](https://en.wikipedia.org/wiki/Histogram) (grey columns).
+The following figures demonstrate the relationship between distribution shape, measures of central tendency (mean and 50th percentile), and measures of spread (mean +/- 2 standard deviations, and 10th / 90th percentiles). Within each figure is an *idealized* normal distribution that is based on the sample mean and standard deviation. The y-axis can be interpreted as the "relative proportion" of samples associated with a value on the x-axis. The thick, smooth lines represent an estimate of [density](https://en.wikipedia.org/wiki/Density_estimation) using real measurements, a continuous alternative to the [histogram](https://en.wikipedia.org/wiki/Histogram) (grey columns).
 
 
 ## Symmetry Around the Central Tendency
@@ -220,7 +220,7 @@ clay <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'clay')
 
 ssc <- na.omit(cbind(sand, silt, clay))
 
-texture.triangle.low.rv.high(ssc, cex=0.75, p=c(0.1, 0.5, 0.9), sim = TRUE, texture.names=TRUE, legend.cex = 0.85)
+textureTriangleSummary(ssc, cex=0.75, p=c(0.1, 0.5, 0.9), texture.names=TRUE, legend.cex = 0.85)
 title('KSSL: Miami, Ap Horizons')
 ```
 
