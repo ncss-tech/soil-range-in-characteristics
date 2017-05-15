@@ -61,6 +61,8 @@ I think that with a little work on the language, we can cover our past ranges an
 
 # References
 
+See reference folder listed above in this GitHub page to access most of these papers
+
 https://casoilresource.lawr.ucdavis.edu/wiki/Low-rv-high
 
 Hudson, B.D. 1980. Ranges in characteristics-how valid are they? Soil Survey Horizons. 21:7-11.
@@ -74,6 +76,8 @@ Indorante, S.J. 2007. Foundational Soil Survey Data-A Case for Linking Basic Soi
 Jansen, I. and Arnold, R. 1976. Defining Ranges of Soil Characteristics, in "Spatial Variabilities of Soils and Landforms". SSSA Spec. Publ. 28. Soil Science Society of America, pp. 89-92.
 
 Livingston, R. L. 2006. "Truthiness" and the National Soil Information System: How Are They Related? Soil Survey Horizons. 47:43-46.
+
+Scovlin, J. 2011. Digitnal Soil Mapping: Quantifying the Soil-Landscape Paradigm. NCSS Newsletter Issue 55.
 
 Wilding, L., Scafer, G., Jones, R. 1964. Morley and Blount soils: A statistical summary of certain physical and chemical properties of some selected profiles from Ohio. Soil Sci. Soc. Proc. 28:674-679.
 
