@@ -1,19 +1,43 @@
-# ideas / proposals / references
+# Proposal for changes to the National Soil Survey Handbook
+## New definitions of “low-representative value-high"
 
+## Introduction
 
-A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in the attached paper from the late '60s.
+Currently the terms low, rv, and-high are mentioned in sections 618.2 and 618.3 of the NSSH, but not defined. A loose definition has
+made sense because of the highly variable
+methods used to populate the low, rv, and high values in all of the various
+data fields in NASIS that represent a collection of many different vintages and
+sources of soil survey data. And, for much of the uses of soil survey
+information, this level of precision likely provides enough accuracy. Additionally,
+this new more precise definition actually does reflect how past data developers
+have thought about the meaning of low-rv-high. 
+We have always tended to populate the rv as a median or a mode, rather
+than a mean.  We have always thought
+about the low and high as values within the observed data set that approximated
+not the extreme, but commonly observed, ends of the data distribution. 
 
-## Possible Goals
+For recent, ongoing, and future data collection efforts however, we aspire to populate
+NASIS fields using as much field-collected data as possible. As our data
+becomes more and more widely used, it has become increasingly urgent that we
+establish more precise definitions for these data ranges. While acknowledging
+that older data may not have been populated using this particular guidance,
+updated definitions are needed for current work that can accommodate more
+data-driven and modern approaches to computing soil survey data ranges. Clear definitions
+will more completely convey our best available knowledge to users and provide a
+standard to assure the correct uses and limitations of our data.
 
-### Proposed definition for new section C. in Part 618.2
+## Proposed definition for new section C. in Part 618.2
 
 C.	For recent and newly populated information in NASIS, the representative values are meant to approximate the 50th percentile of the data. The low and high values are meant to approximate the 5th- 10th and the 90th-95th percentiles, respectively. The low, high, and representative values for data populated prior to this version of the National Soil Survey Handbook were not guided by the percentile approach but also generally approximate the current definition. The percentile approach is preferred over other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data. Even where data used to populate the SSURGO database are not computationally derived, the populated values are designed to approximate the aforementioned percentiles for the data set being described.
 
-
+## Discussion
 
 ### Refinement of "range in characteristics" concept
 
-## Why Percentiles?
+A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in the attached paper from the late '60s.
+
+
+### Why Percentiles?
 
 ![](figures/CA630-5012-MAP-example.png)
 
@@ -23,9 +47,9 @@ C.	For recent and newly populated information in NASIS, the representative value
 
 * Percentiles are simple to calculate, requiring at least 3, but ideally 10 observations.
 
-[Graphical demonstration of these concepts](https://ncss-tech.github.io/soil-range-in-characteristics/why-percentiles.html)
+[Visit this link](https://ncss-tech.github.io/soil-range-in-characteristics/why-percentiles.html) for more discussion and a graphical demonstration of these concepts.
 
-## Discussions
+### Concerns
 
 * many folks aren't familiar with percentiles: establishing a definition for low,rv,high based on percentiles will require some education
 
@@ -35,16 +59,7 @@ C.	For recent and newly populated information in NASIS, the representative value
 
 * there is no consensus on the specific percentiles to pin our low and high concepts to: some argue for 5th/95th, others for 10th/90th, and some others for floating percentiles for different soil properties
 
- 
 
-## Implimentation
-I think that with a little work on the language, we can cover our past ranges and possible future data-gaps by crafting:
-
-* guidelines on the use of percentiles for current / future work, given a reasonable (minimum) sample size
-
-* language to describe how past ranges may have been crafted
-
-* a short discussion on how percentiles are the "theoretical aspiration" for our ranges, but may not always be feasible given data availability or quality
 
 
 
@@ -55,9 +70,6 @@ I think that with a little work on the language, we can cover our past ranges an
  
  * comparison of groups via [shift function](https://garstats.wordpress.com/2016/07/12/shift-function/), [illustrated version](https://garstats.wordpress.com/2017/02/04/shift-function-illustration/)
  
- * 
-
-
 
 # References
 
