@@ -34,7 +34,7 @@ C.	For recent and newly populated information in NASIS, the representative value
 
 ### Refinement of "range in characteristics" concept
 
-A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in the attached paper from the late '60s.
+A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in late '60s.
 
 
 ### Why Percentiles?
@@ -47,7 +47,7 @@ A concise rationale for a clearly defined set of "ranges" was given by Wilding e
 
 * Percentiles are simple to calculate, requiring at least 3, but ideally 10 observations.
 
-[Visit this link](https://ncss-tech.github.io/soil-range-in-characteristics/why-percentiles.html) for more discussion and a graphical demonstration of these concepts.
+[Visit this link for more discussion and a graphical demonstration of these concepts.](https://ncss-tech.github.io/soil-range-in-characteristics/why-percentiles.html) 
 
 ### Concerns
 
