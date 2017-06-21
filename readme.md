@@ -47,28 +47,28 @@ A concise rationale for a clearly defined set of "ranges" was given by Wilding e
 
 * Percentiles are simple to calculate, requiring at least 3, but ideally 10 observations.
 
-[Visit this link for more discussion and a graphical demonstration of these concepts.](https://ncss-tech.github.io/soil-range-in-characteristics/why-percentiles.html) 
+[Visit this link for more discussion and graphical demonstrations of these concepts.](https://ncss-tech.github.io/soil-range-in-characteristics/why-percentiles.html) 
 
 ### Concerns
 
-* many folks aren't familiar with percentiles: establishing a definition for low,rv,high based on percentiles will require some education
+* Many folks aren't familiar with percentiles: establishing a definition for low,rv,high based on percentiles will require some education.
 
-* there is considerable fear about how a new standard will cast doubt on previously established data
+* There is concern about how a new standard will cast doubt on previously established data. How do we inform the user of
+different approaches to data population based on vintage of guidance?
 
-* there is a concern that "computing" low,rv,high, takes away from our ability to interject our "expert knowledge"
+* There is concern that dictating Low, RV, High definitions and putting an emphasis on computing values takes away from our ability to interject our "expert knowledge“. The use of the word “approximate” is meant to accommodate the incorporation of  the field knowledge of soil properties and map unit concepts in the determination of exact values for Data Mapunit population in NASIS.
 
-* there is no consensus on the specific percentiles to pin our low and high concepts to: some argue for 5th/95th, others for 10th/90th, and some others for floating percentiles for different soil properties
+* There is no consensus on the specific percentiles to pin our low and high concepts to: some argue for 5th/95th, others for 10th/90th, and some others for floating percentiles for different soil properties.
 
+* Computed Low-RV-High values ultimately depend on consistent and meaningful correlation of data.
 
-
-
-
+* Can a computed RV supplant a modal pedon value?
 
 # Resources
 
  * [Harrell-Davis quantile estimator](https://garstats.wordpress.com/2016/06/09/the-harrell-davis-quantile-estimator/) -- [link to original article](https://www.jstor.org/stable/2335999?seq=1#page_scan_tab_contents)
  
- * comparison of groups via [shift function](https://garstats.wordpress.com/2016/07/12/shift-function/), [illustrated version](https://garstats.wordpress.com/2017/02/04/shift-function-illustration/)
+ * Comparison of groups via [shift function](https://garstats.wordpress.com/2016/07/12/shift-function/), [illustrated version](https://garstats.wordpress.com/2017/02/04/shift-function-illustration/)
  
 
 # References
