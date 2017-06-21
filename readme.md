@@ -62,7 +62,8 @@ different approaches to data population based on vintage of guidance?
 
 * Computed Low-RV-High values ultimately depend on consistent and meaningful correlation of data.
 
-* Can a computed RV supplant a modal pedon value?
+* Can a computed RV supplant a modal pedon value? Consider Berman Hudson's (Hudson, 1990) proposition that mean values are excellent 
+predictors of soil behavior and that we need not be overly concerned with modal values of individual taxa found in a map unit.
 
 # Resources
 
@@ -73,7 +74,7 @@ different approaches to data population based on vintage of guidance?
 
 # References
 
-See reference folder listed above in this GitHub page to access most of these papers
+See [reference folder of this GitHub page](https://github.com/ncss-tech/soil-range-in-characteristics/tree/master/references) to access most of these papers
 
 https://casoilresource.lawr.ucdavis.edu/wiki/Low-rv-high
 
