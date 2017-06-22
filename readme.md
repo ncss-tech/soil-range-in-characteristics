@@ -1,7 +1,11 @@
-# Proposal for changes to the National Soil Survey Handbook
-## New definitions of “low-representative value-high"
+# Discussion and proposal on the topic of "range in characteristics" and the related "low-RV-high" definition
 
-## Introduction
+A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in late '60s. 
+(Recent discussions among some Soil Science Division staff) [https://casoilresource.lawr.ucdavis.edu/wiki/Low-rv-high] have centered around the desire to have a quantitative definition for the "low, RV, and high" values, to better accomodate computationally derived values when available for populating the SSURGO database. The following proposal attempts to formulate a quantitative definition for these terms, while accomodating the legacy data for which no definition was specified.
+
+## Proposal for changes to the National Soil Survey Handbook - new definitions of “low-representative value-high"
+
+## Background
 
 Currently the terms low, rv, and-high are mentioned in sections 618.2 and 618.3 of the NSSH, but not defined. A loose definition has
 made sense because of the highly variable
@@ -9,10 +13,10 @@ methods used to populate the low, rv, and high values in all of the various
 data fields in NASIS that represent a collection of many different vintages and
 sources of soil survey data. And, for much of the uses of soil survey
 information, this level of precision likely provides enough accuracy. Additionally,
-this new more precise definition actually does reflect how past data developers
+this new more precise definition likely reflects how past data developers
 have thought about the meaning of low-rv-high. 
 We have always tended to populate the rv as a median or a mode, rather
-than a mean.  We have always thought
+than a mean - a commonly occuring value, near the center of the distribution of all observed values. We have always thought
 about the low and high as values within the observed data set that approximated
 not the extreme, but commonly observed, ends of the data distribution. 
 
@@ -31,11 +35,6 @@ standard to assure the correct uses and limitations of our data.
 C.	For recent and newly populated information in NASIS, the representative values are meant to approximate the 50th percentile of the data. The low and high values are meant to approximate the 5th- 10th and the 90th-95th percentiles, respectively. The low, high, and representative values for data populated prior to this version of the National Soil Survey Handbook were not guided by the percentile approach but also generally approximate the current definition. The percentile approach is preferred over other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data. Even where data used to populate the SSURGO database are not computationally derived, the populated values are designed to approximate the aforementioned percentiles for the data set being described.
 
 ## Discussion
-
-### Refinement of "range in characteristics" concept
-
-A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in late '60s.
-
 
 ### Why Percentiles?
 
