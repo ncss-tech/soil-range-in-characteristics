@@ -25,13 +25,13 @@ The following proposal attempts to formulate a quantitative definition for the t
 ## Authors/supporters 
 (Add your name if you concur with this proposal, include title and email address.)
 
-Jennifer Wood, Soil Data Quality Specialist, Region 2 Soil Survey Office, jennifer.wood@ca.usda.gov
-Dylan Beaudette, Digital Soil Mapping Specialist, Region 2 Soil Survey Office, dylan.beaudett@ca.usda.gov
-Tom D’Avello, Soil Scientist/GIS Specialist, NSSC-Geospatial Research Unit, tom.davello@wv.usda.gov
-Stephen Roecker – Soil Data Quality Specialist/GIS Specialist, NRCS Region 11, stephen.roecerk@in.usda.gov
-Russ Almaraz, GIS Specialist, Region 2 Soil survey office, russ.almaraz@ca.usda.gov
-Jason Nemecek, State Soil Scientist, Wisconsin, jason.nemecek@wi.usda.gov
-Skye Wills, Soil Scientist, National Soil Survey Center, skye.wills@ca.usda.gov
+ * Jennifer Wood, Soil Data Quality Specialist, Region 2 Soil Survey Office, jennifer.wood@ca.usda.gov
+ * Dylan Beaudette, Digital Soil Mapping Specialist, Region 2 Soil Survey Office, dylan.beaudett@ca.usda.gov
+ * Tom D’Avello, Soil Scientist/GIS Specialist, NSSC-Geospatial Research Unit, tom.davello@wv.usda.gov
+ * Stephen Roecker – Soil Data Quality Specialist/GIS Specialist, NRCS Region 11, stephen.roecerk@in.usda.gov
+ * Russ Almaraz, GIS Specialist, Region 2 Soil survey office, russ.almaraz@ca.usda.gov
+ * Jason Nemecek, State Soil Scientist, Wisconsin, jason.nemecek@wi.usda.gov
+ * Skye Wills, Soil Scientist, National Soil Survey Center, skye.wills@ca.usda.gov
 
 
 ## Justification
