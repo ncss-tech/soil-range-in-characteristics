@@ -65,12 +65,11 @@ For recent and newly populated information in NASIS, the representative values a
 
 The percentile approach is preferable to other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and the percentile values are bound to the data set from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and the values will always fall within the minimum and maximum of the observed data. Consider a hypothetical data set for field-described clay content from the A horizon of the same taxa:
 
-clay content: 11, 10, 12, 23, 17, 16, 17, 14, 24, 22, 14
-clay content sorted: 10, 11, 12, 14, 14, 16, 17, 17, 22, 23, 24
-
-Low/10th percentile	=	11
-RV/50th percentile	=	16
-High/90th percentile	=	23
+  * clay content: 11, 10, 12, 23, 17, 16, 17, 14, 24, 22, 14
+  * clay content sorted: 10, 11, 12, 14, 14, 16, 17, 17, 22, 23, 24
+  * Low/10th percentile	=	11
+  * RV/50th percentile	=	16
+  * High/90th percentile	=	23
 
 
 ## Discussion
