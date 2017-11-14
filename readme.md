@@ -12,23 +12,23 @@ Population of “low”, “RV”, and “high” values in the NASIS Component 
 
 [Recent discussions among some Soil Science Division staff](https://casoilresource.lawr.ucdavis.edu/wiki/Low-rv-high) have centered around the desire to have a quantitative definition for the "low, RV, and high" values, to better accomodate computationally derived values, when available, for populating the SSURGO database. There is currently this proposed edit to the National Soil Survey Handbook Part 618.55 for the population of Component Slope Gradient in NASIS:
 
-“These values may be determined by a statistical summary of the slope gradient layer for a given map unit layer. Slope gradient distributions are seldom normal, eliminating the use of conventional statistical parameters like mean and standard deviation as tools for determining the high, low a representative values. These values should be based on the robust parameters of percentiles. The representative value is based on the median. The low and high should be based on ranges that capture a majority of the area represented in a map unit. Using the 10th and 90th percentiles as the low and high, represents 80 percent of the area.”   
+"These values may be determined by a statistical summary of the slope gradient layer for a given map unit layer. Slope gradient distributions are seldom normal, eliminating the use of conventional statistical parameters like mean and standard deviation as tools for determining the high, low a representative values. These values should be based on the robust parameters of percentiles. The representative value is based on the median. The low and high should be based on ranges that capture a majority of the area represented in a map unit. Using the 10th and 90th percentiles as the low and high, represents 80 percent of the area."
 
 We propose here to decide on a standard towards which we aspire for all values in NASIS. There appears to be general agreement on the central tendency approach, with RV as median/50th percentile.  For the low/high we can settle on a set of values, acknowledging any limitations. There is a lack of consensus on which percentiles to target for the low and the high. The 5th and 95th, 10th and 90th,  and 25th and 75th  have been suggested. [See the references folder for extended email exchange on this topic](https://github.com/ncss-tech/soil-range-in-characteristics/tree/master/references), in the document titled "RV definition email discussion". 
 
-In the proposal described here, we suggest that the ‘low’ is intended to approximate the 5th to 10th percentile, and the high is intended to approximate the 90th to the 95th percentile. This acknowledges that the data developer has leeway in populating this value depending on the quantity of data, the quality of the data, and the kind of variable being described.  For instance, the data source may be for the map unit, whereas the value being reported is for the map unit component.  Or, data being summarized may be for component soil properties, where much less data might exist, and a wider range of the samples would like to be included ( for instance 5th to 95th percentiles, encompassing 90% of the range observed). This would be in contrast perhaps to modeled raster-based elevation or climatic data sets, where a narrow range of samples could be included due to the abundance of pixel values available to sample (10th to 90th percentiles, where capturing 80% of the range might be more appropriate).
+In the proposal described here, we suggest that the "low" is intended to approximate the 5th to 10th percentile, and the high is intended to approximate the 90th to the 95th percentile. This acknowledges that the data developer has leeway in populating this value depending on the quantity of data, the quality of the data, and the kind of variable being described.  For instance, the data source may be for the map unit, whereas the value being reported is for the map unit component.  Or, data being summarized may be for component soil properties, where much less data might exist, and a wider range of the samples would like to be included ( for instance 5th to 95th percentiles, encompassing 90% of the range observed). This would be in contrast perhaps to modeled raster-based elevation or climatic data sets, where a narrow range of samples could be included due to the abundance of pixel values available to sample (10th to 90th percentiles, where capturing 80% of the range might be more appropriate).
 
 The following proposal attempts to formulate a quantitative definition for the terms "low, RV, high", while accomodating the legacy data for which no definition was established. 
 
-# Proposal for changes to the National Soil Survey Handbook - new definitions of “low-representative value-high"
+# Proposal for changes to the National Soil Survey Handbook - new definitions of �--low-representative value-high"
 
 ## Authors/supporters 
 (Add your name if you concur with this proposal, include title and email address.)
 
  * Jennifer Wood, Soil Data Quality Specialist, Region 2 Soil Survey Office, jennifer.wood@ca.usda.gov
  * Dylan Beaudette, Digital Soil Mapping Specialist, Region 2 Soil Survey Office, dylan.beaudett@ca.usda.gov
- * Tom D’Avello, Soil Scientist/GIS Specialist, NSSC-Geospatial Research Unit, tom.davello@wv.usda.gov
- * Stephen Roecker – Soil Data Quality Specialist/GIS Specialist, NRCS Region 11, stephen.roecerk@in.usda.gov
+ * Tom D'Avello, Soil Scientist/GIS Specialist, NSSC-Geospatial Research Unit, tom.davello@wv.usda.gov
+ * Stephen Roecker -- Soil Data Quality Specialist/GIS Specialist, NRCS Region 11, stephen.roecerk@in.usda.gov
  * Russ Almaraz, GIS Specialist, Region 2 Soil survey office, russ.almaraz@ca.usda.gov
  * Jason Nemecek, State Soil Scientist, Wisconsin, jason.nemecek@wi.usda.gov
  * Skye Wills, Soil Scientist, National Soil Survey Center, skye.wills@ca.usda.gov
@@ -43,7 +43,7 @@ data fields in NASIS that represent a collection of many different vintages and
 sources of soil survey data. And, for much of the uses of soil survey
 information, this level of precision likely provides enough accuracy. Additionally,
 this new more precise definition likely reflects how past data developers
-have thought about the meaning of low-rv-high. 
+have thought about the meaning of low-rv-high.
 We have always tended to populate the rv as a median or a mode, rather
 than a mean - a commonly occuring value, near the center of the distribution of all observed values. We have always thought
 about the low and high as values within the observed data set that approximated
@@ -61,7 +61,17 @@ standard to assure the correct uses and limitations of our data.
 
 ## Proposed definition for new section C. in Part 618.2
 
-C.	For recent and newly populated information in NASIS, the representative values are meant to approximate the 50th percentile of the data. The low and high values are meant to approximate the 5th- 10th and the 90th-95th percentiles, respectively. The low, high, and representative values for data populated prior to this version of the National Soil Survey Handbook were not guided by the percentile approach but also generally approximate the current definition. The percentile approach is preferred over other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data. Even where data used to populate the SSURGO database are not computationally derived, the populated values are designed to approximate the aforementioned percentiles for the data set being described.
+For recent and newly populated information in NASIS, the representative values are meant to approximate the 50th percentile (median) . The 50th percentile is the value where 50% of the data are both above and below that value. The low and high values are meant to approximate the 5th- 10th and the 90th-95th percentiles, respectively. For example, the 5th percentile is the value where 5% of the data are below that value and the 95th percentile is the value where 5% of the data are above that value. The low, high, and representative values for data populated prior to this version of the National Soil Survey Handbook were not guided by the percentile approach but generally approximate the current definition. Even where data used to populate the SSURGO database are not computationally derived, the populated values are designed to approximate the aforementioned percentiles for the data set being described.
+
+The percentile approach is preferable to other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and the percentile values are bound to the data set from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and the values will always fall within the minimum and maximum of the observed data. Consider a hypothetical data set for field-described clay content from the A horizon of the same taxa:
+
+clay content: 11, 10, 12, 23, 17, 16, 17, 14, 24, 22, 14
+clay content sorted: 10, 11, 12, 14, 14, 16, 17, 17, 22, 23, 24
+
+Low/10th percentile	=	11
+RV/50th percentile	=	16
+High/90th percentile	=	23
+
 
 ## Discussion
 
