@@ -8,7 +8,7 @@ The kinds of variables for which we provide numerical ranges in the NASIS databa
 Soil properties/derived values for component horizons in a map unit:	clay %, pH, Ksat, bulk density, %OM, EC, 
 Soil properties and environmental data for components in a map unit:	surface fragments, diagnostic feature depths, Slope, MAAT, MAST
 
-Population of “low”, “RV”, and “high” values in the NASIS Component table is major part of initial mapping and update work. The definitions of “low”, “RV”, and “high” values are not defined in the National Soil Survey Handbook and other National and Regional guidance is variable or lacking. As a result, the population of these values varies across Regions, office areas, survey areas and even across map units within a survey area. A common approach for the RV is to use the values from the "modal" or Component pedon designated as the representative pedon for that component in the NASIS Data Mapunit.
+Population of "low", "RV", and "high" values in the NASIS Component table is major part of initial mapping and update work. The definitions of "low", "RV", and "high" values are not defined in the National Soil Survey Handbook and other National and Regional guidance is variable or lacking. As a result, the population of these values varies across Regions, office areas, survey areas and even across map units within a survey area. A common approach for the RV is to use the values from the "modal" or Component pedon designated as the representative pedon for that component in the NASIS Data Mapunit.
 
 [Recent discussions among some Soil Science Division staff](https://casoilresource.lawr.ucdavis.edu/wiki/Low-rv-high) have centered around the desire to have a quantitative definition for the "low, RV, and high" values, to better accomodate computationally derived values, when available, for populating the SSURGO database. There is currently this proposed edit to the National Soil Survey Handbook Part 618.55 for the population of Component Slope Gradient in NASIS:
 
@@ -95,7 +95,7 @@ The percentile approach is preferable to other measures of central tendency, suc
 * There is concern about how a new standard will cast doubt on previously established data. How do we inform the user of
 different approaches to data population based on vintage of guidance?
 
-* There is concern that dictating Low, RV, High definitions and putting an emphasis on computing values takes away from our ability to interject our "expert knowledge“. The use of the word “approximate” is meant to accommodate the incorporation of  the field knowledge of soil properties and map unit concepts in the determination of exact values for Data Mapunit population in NASIS.
+* There is concern that dictating Low, RV, High definitions and putting an emphasis on computing values takes away from our ability to interject our "expert knowledge". The use of the word "approximate" is meant to accommodate the incorporation of the field knowledge of soil properties and map unit concepts in the determination of exact values for Data Mapunit population in NASIS.
 
 * There is no consensus on the specific percentiles to pin our low and high concepts to: some argue for 5th/95th, others for 10th/90th, and some others for floating percentiles for different soil properties.
 
