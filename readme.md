@@ -1,6 +1,6 @@
 # Discussion and proposal on the topic of "range in characteristics" and the related "low-RV-high" definition
 
-* To provide edits or comments on this document, contact dylan.beaudette@ca.usda.gov or jennifer.wood@ca.usda.gov)
+* To provide edits or comments on this document, contact dylan.beaudette@ca.usda.gov or jennifer.wood@ca.usda.gov
 
 A concise rationale for a clearly defined set of "ranges" was given by Wilding et al. in 1964. In the following decades, various authors addressed the issue of ranges for soil and map unit properties, offering both philosophical and operational approaches (Jansen and Arnold 1976, Hudson 1980 and 1990, Young et al 1991). Until the creation of the NASIS SSURGO database, soil and map unit property data were  provided to users, in the printed manuscripts, as ranges with two end points. These ranges were developed using the "Form 5" from pedon data collected during initial soil survey operations. When NASIS was created, the concept of the "representative value (RV)" was added to the range end points ("low" and "high") in order to provide a single value needed by a variety of modern uses made possible by the digital environment. When the manuscript range values were converted from the intermediate 3SD database to NASIS, the middle value between the two end points was used to populate the RV. For subsequent initial soil surveys, the low, RV, and high values were populated directly into NASIS, using a variety of approaches.
 
@@ -20,7 +20,7 @@ In the proposal described here, we suggest that the "low" is intended to approxi
 
 The following proposal attempts to formulate a quantitative definition for the terms "low, RV, high", while accomodating the legacy data for which no definition was established. 
 
-# Proposal for changes to the National Soil Survey Handbook - new definitions of â--low-representative value-high"
+# Proposal for changes to the National Soil Survey Handbook - new definitions of Ã¢--low-representative value-high"
 
 ## Authors/supporters 
 (Add your name if you concur with this proposal, include title and email address.)
@@ -63,7 +63,7 @@ standard to assure the correct uses and limitations of our data.
 
 For recent and newly populated information in NASIS, the representative values are meant to approximate the 50th percentile (median) . The 50th percentile is the value where 50% of the data are both above and below that value. The low and high values are meant to approximate the 5th- 10th and the 90th-95th percentiles, respectively. For example, the 5th percentile is the value where 5% of the data are below that value and the 95th percentile is the value where 5% of the data are above that value. The low, high, and representative values for data populated prior to this version of the National Soil Survey Handbook were not guided by the percentile approach but generally approximate the current definition. Even where data used to populate the SSURGO database are not computationally derived, the populated values are designed to approximate the aforementioned percentiles for the data set being described.
 
-The percentile approach is preferable to other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and the percentile values are bound to the data set from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and the values will always fall within the minimum and maximum of the observed data. Consider a hypothetical data set for field-described clay content from the A horizon of the same taxa:
+The percentile approach is preferable to other measures of central tendency, such as the mean and standard deviation, because percentiles require no distributional assumptions and the percentile values fall within the bounds of the data set from which they are computed. This means that percentiles can provide benchmarks for the spread and central tendency for both normal and non-normal distributions, and the values will always fall within the minimum and maximum of the observed data. Consider a hypothetical data set for field-described clay content from the A horizon of the same taxa:
 
   * clay content: 11, 10, 12, 23, 17, 16, 17, 14, 24, 22, 14
   * clay content sorted: 10, 11, 12, 14, 14, 16, 17, 17, 22, 23, 24
