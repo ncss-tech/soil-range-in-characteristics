@@ -67,6 +67,7 @@ The percentile approach is preferable to other measures of central tendency, suc
 
   * clay content: 11, 10, 12, 23, 17, 16, 17, 14, 24, 22, 14
   * clay content sorted: 10, 11, 12, 14, 14, 16, 17, 17, 22, 23, 24
+  
   * Low/10th percentile	=	11
   * RV/50th percentile	=	16
   * High/90th percentile	=	23
