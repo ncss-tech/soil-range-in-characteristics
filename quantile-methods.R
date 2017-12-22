@@ -1,9 +1,10 @@
 library(soilDB)
+library(sharpshootR)
 library(Hmisc)
 
 data("loafercreek")
 
-testIt <- function(x, pr=c(0, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 1)) {
+testIt <- function(x, pr=c(0, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 1)) {
   
   # compute quantile function over 8 methods
   x.q <- sapply(1:8, function(i) {
@@ -38,10 +39,15 @@ hist(x)
 sort(table(x), decreasing = TRUE)
 length(na.omit(x))
 
+png(file='figures/loafercreek-A-hz-example.png', width=800, height=400, type='cairo', antialias = 'subpixel')
+par(mar=c(3,1,3,1))
+percentileDemo(x, labels.signif = 2, hist.breaks = 10, xlab='', ylab='Field Decribed Clay (%)', main='Loafercreek A Horizons')
+dev.off()
+
 # all samples: methods converge
 qq <- testIt(x)
 matplot(qq[, 1], qq[, -1], type='b')
-qq[, -1]
+t(qq[, -1])
 
 
 # use a small fraction of obs: less stable
