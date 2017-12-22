@@ -81,6 +81,10 @@ The percentile approach is preferable to other measures of central tendency, suc
 
 ![](figures/CA630-5012-MAP-example.png)
 
+
+![](figures/loafercreek-A-hz-example.png)
+
+
 * Percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide meaningful benchmarks for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data.
 
 * Percentiles have a direct interpretation: "given the available data, we know that soil property X is <= Y 5% of the time, and, <= Z 95% of the time". This same statement can be framed using probabilities or proportions: "given the available data, soil property X is within the range of Y--Z 90% of the time".
