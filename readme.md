@@ -14,9 +14,9 @@ Discussions among some Soil Science Division staff have centered around the desi
 
 "These values may be determined by a statistical summary of the slope gradient layer for a given map unit layer. Slope gradient distributions are seldom normal, eliminating the use of conventional statistical parameters like mean and standard deviation as tools for determining the high, low a representative values. These values should be based on the robust parameters of percentiles. The representative value is based on the median. The low and high should be based on ranges that capture a majority of the area represented in a map unit. Using the 10th and 90th percentiles as the low and high, represents 80 percent of the area."
 
-We propose here to decide on a standard towards which we aspire for all values in NASIS. There appears to be general agreement on the central tendency approach, with RV as median/50th percentile.  For the low/high we can settle on a set of values, acknowledging any limitations. There is a lack of consensus on which percentiles to target for the low and the high. The 5th and 95th, 10th and 90th,  and 25th and 75th  have been suggested. [See the technical-review folder for extended email exchange on this topic](https://github.com/ncss-tech/soil-range-in-characteristics/tree/master/technical-review), in the document titled "RV definition email discussion". 
+We propose here a standard towards which we aspire for all values in NASIS. There appears to be general agreement on the central tendency approach, with RV as median/50th percentile.  For the low/high we can settle on a set of values, acknowledging any limitations. There is a lack of consensus on which percentiles to target for the low and the high. The 5th and 95th, 10th and 90th,  and 25th and 75th have been suggested. [See the technical-review folder for extended email exchange on this topic](https://github.com/ncss-tech/soil-range-in-characteristics/tree/master/technical-review), in the document titled "RV definition email discussion". 
 
-In the proposal described here, we suggest that the "low" is intended to approximate the 5th to 10th percentile, and the high is intended to approximate the 90th to the 95th percentile. This acknowledges that the data developer has leeway in populating this value depending on the quantity of data, the quality of the data, and the kind of variable being described.  For instance, the data source may be for the map unit, whereas the value being reported is for the map unit component.  Or, data being summarized may be for component soil properties, where much less data might exist, and a wider range of the samples would like to be included ( for instance 5th to 95th percentiles, encompassing 90% of the range observed). This would be in contrast perhaps to modeled raster-based elevation or climatic data sets, where a narrow range of samples could be included due to the abundance of pixel values available to sample (10th to 90th percentiles, where capturing 80% of the range might be more appropriate).
+In the proposal described here, we suggest that the low is intended to approximate the 5th to 10th percentile, and the high is intended to approximate the 90th to the 95th percentile. This acknowledges that the data developer has leeway in populating this value depending on the quantity of data, the quality of the data, and the kind of variable being described.  For instance, the data source may be for the map unit, whereas the value being reported is for the map unit component.  Or, data being summarized may be for component soil properties, where much less data might exist, and a wider range of the samples would like to be included ( for instance 5th to 95th percentiles, encompassing 90% of the range observed). This would be in contrast perhaps to modeled raster-based elevation or climatic data sets, where a narrow range of samples could be included due to the abundance of pixel values available to sample (10th to 90th percentiles, where capturing 80% of the range might be more appropriate).
 
 The following proposal attempts to formulate a quantitative definition for the terms "low, RV, high", while accomodating the legacy data for which no definition was established. 
 
@@ -37,27 +37,11 @@ The following proposal attempts to formulate a quantitative definition for the t
 ## Justification
 
 Currently the terms low, rv, and-high are mentioned in sections [618.2 and 618.3 of the NSSH](https://www.nrcs.usda.gov/wps/portal/nrcs/detail/soils/ref/?cid=nrcs142p2_054223), but not defined. A loose definition has
-made sense because of the highly variable
-methods used to populate the low, rv, and high values in all of the various
-data fields in NASIS that represent a collection of many different vintages and
-sources of soil survey data. And, for much of the uses of soil survey
-information, this level of precision likely provides enough accuracy. Additionally,
-this new more precise definition likely reflects how past data developers
-have thought about the meaning of low-rv-high.
-We have always tended to populate the rv as a median or a mode, rather
-than a mean - a commonly occuring value, near the center of the distribution of all observed values. We have always thought
-about the low and high as values within the observed data set that approximated
-not the extreme, but commonly observed, ends of the data distribution. 
+made sense because of the highly variable methods used to populate the low, rv, and high values in all of the various
+data fields in NASIS that represent a collection of many different vintages and sources of soil survey data. And, for much of the uses of soil survey information, this level of precision likely provides enough accuracy. Additionally, this new more precise definition likely reflects how past data developers have thought about the meaning of low-rv-high. We have always tended to populate the rv as a median or a mode, rather than a mean - a commonly occuring value, near the center of the distribution of all observed values. We have always thoughtabout the low and high as values within the observed data set that approximated not the extreme, but commonly observed, ends of the data distribution. 
 
-For recent, ongoing, and future data collection efforts however, we aspire to populate
-NASIS fields using as much field-collected data as possible. As our data
-becomes more and more widely used, it has become increasingly urgent that we
-establish more precise definitions for these data ranges. While acknowledging
-that older data may not have been populated using this particular guidance,
-updated definitions are needed for current work that can accommodate more
-data-driven and modern approaches to computing soil survey data ranges. Clear definitions
-will more completely convey our best available knowledge to users and provide a
-standard to assure the correct uses and limitations of our data.
+For recent, ongoing, and future data collection efforts however, we aspire to populate NASIS fields using as much field-collected data as possible. As our data becomes more and more widely used, it has become increasingly urgent that we establish more precise definitions for these data ranges. While acknowledging that older data may not have been populated using this particular guidance,
+updated definitions are needed for current work that can accommodate more data-driven and modern approaches to computing soil survey data ranges. Clear definitions will more completely convey our best available knowledge to users and provide a standard to assure the correct uses and limitations of our data.
 
 ## Proposed definition for new section C. in Part 618.2
 
