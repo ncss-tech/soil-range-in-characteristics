@@ -20,7 +20,7 @@ In the proposal described here, we suggest that the low is intended to approxima
 
 The following proposal attempts to formulate a quantitative definition for the terms "low, RV, high", while accomodating the legacy data for which no definition was established. 
 
-# Proposal for changes to the National Soil Survey Handbook - new definitions of â--low-representative value-high"
+# Proposal for changes to the National Soil Survey Handbook - new definitions of "low-representative value-high"
 
 ## Authors/supporters 
 (Add your name if you concur with this proposal, include title and email address.)
@@ -95,7 +95,7 @@ different approaches to data population based on vintage of guidance? In the cur
 * Computed Low-RV-High values ultimately depend on consistent and meaningful correlation of data.
 
 * Can a computed RV supplant a modal pedon value? Consider Berman Hudson's (Hudson, 1990) proposition that mean values are adequate 
-predictors of soil behavior and that we need not be overly concerned with modal values of individual taxa found in a map unit. Additionally, it is clear in our guidance that component is meant to be aggregated, not point data. There is no mandate in the official national guidance to require the use of the modal pedon values, only regional and local convention.
+predictors of soil behavior and that we need not be overly concerned with modal values of individual taxa found in a map unit. Additionally, it is clear in our guidance that the component is meant to contain aggregated, not point data. There is no mandate in the official national guidance to require the use of the modal pedon values, only regional and local convention.
 
 # Resources
 
