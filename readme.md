@@ -96,19 +96,22 @@ The percentile approach is preferable to other measures of central tendency, suc
 ### Concerns
 
 Extended comments provided during the technical review of this proposal are available in the [technical-review folder](https://github.com/ncss-tech/soil-range-in-characteristics/tree/master/technical-review) in this repository.
-* Many folks aren't familiar with percentiles: establishing a definition for low,rv,high based on percentiles will require some education.
+
+* Many folks aren't familiar with percentiles: establishing a definition for low,rv,high based on percentiles will require some education. An example is provided for inclusion with the definition and a webinar is proposed to be presented after the proposal is rolled out for comment.
 
 * There is concern about how a new standard will cast doubt on previously established data. How do we inform the user of
-different approaches to data population based on vintage of guidance?
+different approaches to data population based on vintage of guidance? In the current proposal we state that even though there was no definition for l-rv-h prior to the current edition of the NSSH, that the prior values adequately approximate the proposed definition: Prior to the proposed definition, the values populated came from the data set observed/known to exist in the field, the rv was taken from a either from the modal pedon, or from somewhere in the middle of commonly occuring values in a range. And, the low and high values were taken not taken from the most extreme values observed/known to occur. The modal pedon is ideally a collection of a set of commonly occuring values, so using values of the modal pedon in theory provides a value that approximates the median value. Even when class limits, and the middle value within those end points, are used, it is meant to communicate the central tendency and spread for the concept that the data developer means to represent. While information on the vintage of the soil survey area publication is available, the SSURGO database is now in continuous update mode. There will be old and new data mixed into most surveys from now on. Even without a change in the l-rv-high definition, the new data are already populated to modern, and thus different standards. This change would just be another update to our modern standards.
 
-* There is concern that dictating Low, RV, High definitions and putting an emphasis on computing values takes away from our ability to interject our "expert knowledge". The use of the word "approximate" is meant to accommodate the incorporation of the field knowledge of soil properties and map unit concepts in the determination of exact values for Data Mapunit population in NASIS.
+* There is a concern that l-rv-high values calculated from map unit data, such as climate, elevation, and slope values will blindly be used to represent the component data. Again what is required here is the same training we are always striving to provide SSD soil scientists - know the source of your data, and what part of the landscape you are describing to the user. The SSURGO database is a representation of a landscape model developed from field data, lab data, and field observations, and is not intended to be a purely data driven product.   
 
-* There is no consensus on the specific percentiles to pin our low and high concepts to: some argue for 5th/95th, others for 10th/90th, and some others for floating percentiles for different soil properties.
+* There is concern that dictating Low, RV, High definitions and putting an emphasis on computing values takes away from our ability to interject our "expert knowledge". The use of the word "approximate" is meant to accommodate the incorporation of the field knowledge of soil properties and map unit concepts in the determination of exact values for Data Mapunit population in NASIS. The concluding statement is meant to reinforce this idea, that values computed from a set of data should not be taken blindly, but used with the full knowledge of the source of the data and of the conditions observed on the ground.
+
+* There is no consensus on the specific percentiles to pin our low and high concepts to: some argue for 5th/95th, others for 10th/90th, and some others for floating percentiles for different soil/component/mapunit properties. We propose a range from 5-10th for the low and 90-95th for the high to allow flexibility for the data developer to use their knowledge of the data type, field observations, and conveyance of the component/map unit concepts.
 
 * Computed Low-RV-High values ultimately depend on consistent and meaningful correlation of data.
 
 * Can a computed RV supplant a modal pedon value? Consider Berman Hudson's (Hudson, 1990) proposition that mean values are adequate 
-predictors of soil behavior and that we need not be overly concerned with modal values of individual taxa found in a map unit.
+predictors of soil behavior and that we need not be overly concerned with modal values of individual taxa found in a map unit. Additionally, it is clear in our guidance that component is meant to be aggregated, not point data. There is no mandate in the official national guidance to require the use of the modal pedon values, only regional and local convention.
 
 # Resources
 
