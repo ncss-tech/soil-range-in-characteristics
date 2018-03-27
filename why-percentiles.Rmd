@@ -114,6 +114,32 @@ resulting:
  * 90th percentile: **`r quantile(x, probs=c(0.9))`**
 
 
+
+### Visual Demonstration
+Consider a histogram derived from carbon stock values representing various regions of the US. Within this *distribution* a carbon stock of 85 tons/ha is associated with the 16th percentile. In other words, 16% of the collected carbon stock values are less than 85 tons/ha.
+
+```{r echo=FALSE, warning=FALSE, fig.width=9, fig.height=5.25}
+# 1000 normally-distributed random values, mean = 100, SD = 15
+set.seed(1010101)
+x <- rnorm(1000, 100, 15)
+# create empirical cumulative distribution function
+e <- ecdf(x)
+# pick a single point
+p <- 85
+# annotate
+p.lab <- sprintf('%s tons/ha\n%sth percentile', round(p), round(e(p) * 100))
+
+# plot
+par(mar=c(6,1,4,1))
+hist(x, axes=FALSE, xlab='', ylab='', main='Carbon Stock: All Regions', breaks=50, col = grey(0.9), border = grey(0.85))
+axis(1, at=pretty(x, n = 10), cex.axis=0.75)
+points(p, 0, pch=21, bg='RoyalBlue', col='black', cex=2)
+axis(1, at=p, labels = p.lab, cex.axis=0.75, line=2.5, lwd=2, tcl=2, col = 'RoyalBlue', font=2)
+box()
+```
+
+
+
 ## Why Percentiles?
 
 * Percentiles require no distributional assumptions and are bound to the data from which they are computed. This means that percentiles can provide meaningful benchmarks for both normal and non-normal distributions, and, the limits will always fall within the min/max of the observed data.
@@ -178,6 +204,7 @@ res <- percentileDemo(x, xlab='', main='Hypothetical Bimodal Distribution', labe
 ```
 
 # Examples
+
 
 ## Lab Characterization Data
 The following examples are based on KSSL data correlated to the [Miami](https://casoilresource.lawr.ucdavis.edu/sde/?series=miami) series.
@@ -337,6 +364,26 @@ z <- h$clay[idx]
 
 # make figure
 percentileDemo(z, hist.breaks=30, xlab='Field Described Percent Clay', main='NASIS: Nedsgulch, Bt1 horizons')
+```
+
+## Empirical Cumulative Distribution Function (ECDF)
+
+```{r eval=FALSE}
+# 1000 normally-distributed random values, mean = 100, SD = 15
+x <- rnorm(1000, 100, 15)
+# create empirical cumulative distribution function
+e <- ecdf(x)
+# pick a single point
+p <- sample(x, 1)
+# annotate
+p.lab <- paste0(round(p), ' tons/ha\n', round(e(p) * 100), 'th percentile of all regions')
+
+# plot
+par(mar=c(6,1,4,1))
+hist(x, axes=FALSE, xlab='', ylab='', main='Carbon Stocks of all Regions', breaks=50, col = grey(0.9), border = grey(0.85))
+axis(1, at=pretty(x, n = 10), cex.axis=0.75)
+points(p, 0, pch=21, bg='RoyalBlue', col='black', cex=2)
+axis(1, at=p, labels = p.lab, cex.axis=0.75, line=2.5, lwd=2, tcl=2, col = 'RoyalBlue')
 ```
 
 
