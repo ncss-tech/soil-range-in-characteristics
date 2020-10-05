@@ -28,6 +28,8 @@ library(raster)
 library(e1071)
 library(sharpshootR)
 
+## TODO: there are better ways to do this now
+
 # get a subset of a given variable from an SPC, by pattern matching against hz designation
 subsetData <- function(SPC, hzname, hz_pat, var) {
   
@@ -241,14 +243,20 @@ res <- percentileDemo(x, xlab='Horizon Thickness (cm)', main='KSSL: Miami, Bt1 H
 ```
 
 ```{r echo=FALSE, warning=FALSE, fig.width=8.5, fig.height=8.5, fig.keep='last'}
+# probably not the most efficient
 sand <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'sand')
 silt <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'silt')
 clay <- subsetData(kssl, hzname = 'hzn_desgn', hz_pat = 'Ap', var = 'clay')
 
-ssc <- na.omit(cbind(sand, silt, clay))
+# prepare data into the format expected by textureTriangleSummary
+ssc <- na.omit(
+  data.frame(
+    SAND = sand, 
+    SILT = silt, 
+    CLAY = clay)
+)
 
-textureTriangleSummary(ssc, cex=0.75, p=c(0.1, 0.5, 0.9), texture.names=TRUE, legend.cex = 0.85)
-title('KSSL: Miami, Ap Horizons')
+textureTriangleSummary(ssc, cex = 0.75, p = c(0.1, 0.5, 0.9), main = 'KSSL: Miami, Ap Horizons')
 ```
 
 
